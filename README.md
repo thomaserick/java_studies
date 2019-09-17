@@ -11,7 +11,7 @@ Estudos em Java
       - Debugger
       - APIs
 
-## Usuarios Java
+## Usuários Java
 
 - JRE (Java runtime Enviroment)
  - JVM
@@ -22,7 +22,7 @@ Estudos em Java
   - Compilador JIT (Just in Time)
 - Bibliotecas
 
-# Instalacao Ubunto
+# Instalação Ubuntu
 
 - 1
 ~$ sudo Nautilus
