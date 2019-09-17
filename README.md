@@ -39,11 +39,10 @@ em seguida no menu contextual clique na opção abrir no terminal ou abrir termi
 use o comando ~$ echo "" (coloque sinal de maior aqui, o YT não permite o uso do sinal na descrição) jdk.sh
 
 - 6 copiar as seguintes variaveis e colar no arquivo jdk.sh criado no passo 5
-
- - J2SDKDIR="/usr/lib/jvm/java-8-oracle"
- - J2REDIR="/usr/lib/jvm/java-8-oracle/jre"
- - JAVA_HOME="/usr/lib/jvm/java-8-oracle"
- - DERBY_HOME="/usr/lib/jvm/java-8-oracle/db"
+  - J2SDKDIR="/usr/lib/jvm/java-8-oracle"
+  - J2REDIR="/usr/lib/jvm/java-8-oracle/jre"
+  - JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+  - DERBY_HOME="/usr/lib/jvm/java-8-oracle/db"
 
 source /etc/profile.d/jdk.sh
 
