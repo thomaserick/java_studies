@@ -11,9 +11,9 @@ public class Main {
 		String login = JOptionPane.showInputDialog("Login");
 		String senha = JOptionPane.showInputDialog("Senha");
 
-		PermitirAcesso secretario = new Secretario();
+		PermitirAcesso permitirAcesso = new Secretario(login, senha);
 
-		if (new Secretario().autenticar(login, senha)) {
+		if (permitirAcesso.autenticar()) {
 			System.out.println("Logado com Sucesso");
 
 		} else {
@@ -32,7 +32,7 @@ public class Main {
 		diretor.setRegistroGeral("1231321");
 		diretor.setIdade(25);
 
-//		Secretario secretario = new Secretario();
+		Secretario secretario = new Secretario();
 		secretario.setNome("Thaila");
 		secretario.setExperiencia("Financeiro");
 		secretario.setIdade(18);
