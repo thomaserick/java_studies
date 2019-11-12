@@ -2,6 +2,8 @@ package javacurso.classes;
 
 import javax.swing.JOptionPane;
 
+import cursojava.interfaces.PermitirAcesso;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -9,11 +11,9 @@ public class Main {
 		String login = JOptionPane.showInputDialog("Login");
 		String senha = JOptionPane.showInputDialog("Senha");
 
-		Secretario secretario = new Secretario();
-		secretario.setLogin(login);
-		secretario.setSenha(senha);
+		PermitirAcesso secretario = new Secretario();
 
-		if (secretario.autenticar()) {
+		if (new Secretario().autenticar(login, senha)) {
 			System.out.println("Logado com Sucesso");
 
 		} else {
