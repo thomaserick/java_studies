@@ -2,7 +2,7 @@ package javacurso.classes;
 
 import javax.swing.JOptionPane;
 
-import cursojava.interfaces.PermitirAcesso;
+import cursojava.classesaux.FuncaoAutenticacao;
 
 public class Main {
 
@@ -11,9 +11,17 @@ public class Main {
 		String login = JOptionPane.showInputDialog("Login");
 		String senha = JOptionPane.showInputDialog("Senha");
 
-		PermitirAcesso permitirAcesso = new Secretario(login, senha);
+		// FuncaoAutenticacao auth = new FuncaoAutenticacao();
 
-		if (permitirAcesso.autenticar()) {
+		if (new FuncaoAutenticacao(new Diretor(login, senha)).autenticar()) {
+			System.out.println("Logado com Sucesso");
+
+		} else {
+
+			System.out.println("Falha na autenticação");
+		}
+
+		if (new FuncaoAutenticacao(new Secretario(login, senha)).autenticar()) {
 			System.out.println("Logado com Sucesso");
 
 		} else {
