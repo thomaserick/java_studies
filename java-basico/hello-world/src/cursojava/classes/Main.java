@@ -1,14 +1,7 @@
-package cursojava.excecao;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+package cursojava.classes;
 
 import javax.swing.JOptionPane;
 
-import cursojava.classes.Aluno;
-import cursojava.classes.Diretor;
-import cursojava.classes.Secretario;
 import cursojava.classesaux.FuncaoAutenticacao;
 
 public class Main {
@@ -17,8 +10,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		try {
-
-			lerArquivo();
 
 			String login = JOptionPane.showInputDialog("Login");
 			String senha = JOptionPane.showInputDialog("Senha");
@@ -98,13 +89,6 @@ public class Main {
 			System.out.println("Sempre será executado o finally");
 
 		}
-
-	}
-
-	public static void lerArquivo() throws FileNotFoundException { /* Declaração para retornar para o método Pai */
-
-		File fil = new File("C://lines.txt");
-		Scanner scanner = new Scanner(fil);
 
 	}
 

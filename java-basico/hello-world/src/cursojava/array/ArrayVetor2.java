@@ -1,7 +1,7 @@
 package cursojava.array;
 
-import javacurso.classes.Aluno;
-import javacurso.classes.Disciplina;
+import cursojava.classes.Aluno;
+import cursojava.classes.Disciplina;
 
 public class ArrayVetor2 {
 
