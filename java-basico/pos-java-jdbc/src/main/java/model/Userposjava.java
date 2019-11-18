@@ -6,6 +6,11 @@ public class Userposjava {
 	private String nome;
 	private String email;
 
+	@Override
+	public String toString() {
+		return "Userposjava [id=" + id + ", nome=" + nome + ", email=" + email + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
