@@ -105,4 +105,27 @@ public class UserPosDAO {
 
 	}
 
+	// Update
+	public void atualizar(Userposjava userposjava) {
+
+		try {
+
+			String sql = "update userposjava set nome = ? where id =" + userposjava.getId();
+
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.setString(1, userposjava.getNome());
+			stm.execute();
+			connection.commit();
+
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+
+	}
+
 }
