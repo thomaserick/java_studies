@@ -15,7 +15,7 @@ public class TesteBancoJdbc {
 		UserPosDAO userPosDao = new UserPosDAO();
 		Userposjava userposjava = new Userposjava();
 
-		userposjava.setId(5L);
+//		userposjava.setId(5L);
 		userposjava.setNome("Paulo");
 		userposjava.setEmail("paulo@gmail.com");
 
