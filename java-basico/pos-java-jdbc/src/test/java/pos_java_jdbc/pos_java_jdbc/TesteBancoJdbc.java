@@ -87,7 +87,7 @@ public class TesteBancoJdbc {
 			dao.deletar(8L);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
@@ -116,6 +116,30 @@ public class TesteBancoJdbc {
 
 		for (BeanUserFone beanUserFone : beanUserFones) {
 			System.out.println(beanUserFone);
+		}
+
+	}
+
+	@Test
+	public void testeDeleteUserFone() {
+		try {
+			UserPosDAO dao = new UserPosDAO();
+			dao.deleteUserTel(5L);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
+	public void testeDeletarTel() {
+		try {
+			UserPosDAO dao = new UserPosDAO();
+			dao.deletarTel(8L);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
