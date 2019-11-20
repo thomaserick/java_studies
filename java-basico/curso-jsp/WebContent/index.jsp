@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<%@ include file="pagina-include.jsp" %>
+
 	<h1>Bem vindo ao Curso JSP</h1>
 	<%=
 		"seu sucesso garantido.."
