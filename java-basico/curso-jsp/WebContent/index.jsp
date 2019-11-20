@@ -20,7 +20,19 @@
 
 	</form>
 	
+	<!-- Page -->
+	<%@ page info="Página do curso de JSP" %>
+	
+	<!-- ErrorPage -->
+	<%@ page errorPage="error.jsp" %>
+<%--  <%= 100/0 %>  --%>
+	
 	<%session.setAttribute("Curso", "curso de jsp"); %>
 
+<%@ page import="java.util.Date" %>
+
+
+
+<%= "Data de Hoje: " + new Date() + " " + getServletInfo() %>
 </body>
 </html>
