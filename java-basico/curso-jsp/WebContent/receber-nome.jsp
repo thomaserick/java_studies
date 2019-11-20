@@ -11,14 +11,39 @@
 
 	<%="Nome recebido: " + request.getParameter("nome")%>
 
-	<%! int cont = 10;
+	<%!int cont = 10;
+
+	public int retorna(int n) {
+		return n * 3;
+	}%>
+	<%="Teste: " + retorna(cont)%>
+	</br>
+
+<!-- Request -->
+	<!-- 	Contexto -->
+	<%=request.getContextPath()%>
+	</br>
+	<!-- 	Name -->
+	<%=request.getLocalName() %>
+	</br>
+	<!-- 	Porta -->
+	<%=request.getLocalPort() %>
+	</br>
+	<!-- 	Protocolo -->
+	<% request.getProtocol(); %>
 	
-		public int retorna(int n){
-			return n * 3;
-		}
-		
-	%>
-	<%= "Teste: " +retorna(cont) %>
+	
+	<!-- Response -->
+	
+	<%= application.getInitParameter("estado") %>
+	
+	</br>
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>
