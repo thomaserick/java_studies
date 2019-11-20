@@ -19,6 +19,8 @@
 		<input type="submit" value="Enviar">
 
 	</form>
+	
+	<%session.setAttribute("Curso", "curso de jsp"); %>
 
 </body>
 </html>

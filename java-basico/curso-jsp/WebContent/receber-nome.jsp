@@ -39,6 +39,8 @@
 	
 	</br>
 	
+	<%= session.getAttribute("Curso") %>
+	
 	
 	
 	
