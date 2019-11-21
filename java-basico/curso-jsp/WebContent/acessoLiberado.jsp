@@ -8,5 +8,10 @@
 </head>
 <body>
 <h3>Seja bem Vindo a Geek Home</h3>
+
+
+<a href="cadastroUsuario.jsp">Cadastro de Usuário</a>
+
+
 </body>
 </html>

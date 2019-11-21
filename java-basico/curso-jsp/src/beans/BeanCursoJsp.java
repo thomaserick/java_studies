@@ -2,16 +2,17 @@ package beans;
 
 public class BeanCursoJsp {
 
+	private long id;
 	private String login;
-	private String senha;
+	private String passwd;
+	private String user;
 
-	public boolean validarLoginSenha(String login, String senha) {
+	public long getId() {
+		return id;
+	}
 
-		if (login.equals("admin") && senha.contentEquals("admin")) {
-			return true;
-		} else {
-			return false;
-		}
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getLogin() {
@@ -22,12 +23,20 @@ public class BeanCursoJsp {
 		this.login = login;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPasswd() {
+		return passwd;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 }
