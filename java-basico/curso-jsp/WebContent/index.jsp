@@ -10,15 +10,19 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Curso-JSP</title>
+<link rel="stylesheet" type="text/css" href="resources/css/style.css" media="screen" />
 </head>
 <body>
 
-	<form action="LoginServlet" method="post">
-		<input type="text" id="login" name="login">
-		<br /> 
-		<input type="text" id="passwd" name="passwd"> 
-		<br />
-		<input type="submit" value="logar">
-	</form> 
+	<div class="login-page">
+		<div class="form">
+			<form action="LoginServlet" method="post" class="login-form">
+				<input type="text" placeholder="username" id="login" name="login" />
+				<input type="password" placeholder="password" id="passwd"
+					name="passwd" /> 
+					<button type="submit" value="login">Login</button>
+			</form>
+		</div>
+	</div>
 </body>
 </html>
