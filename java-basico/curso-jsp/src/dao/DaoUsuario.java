@@ -21,13 +21,14 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username) values (?, ?, ?)";
+		String sql = "insert into usuario (login, passwd, username, fone) values (?, ?, ?, ?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getPasswd());
 			stm.setString(3, usuario.getUser());
+			stm.setString(4, usuario.getFone());
 			stm.execute();
 			connection.commit();
 		} catch (Exception e) {
@@ -62,6 +63,7 @@ public class DaoUsuario {
 			usuario.setLogin(result.getString("login"));
 			usuario.setPasswd(result.getString("passwd"));
 			usuario.setUser(result.getString("username"));
+			usuario.setFone(result.getString("fone"));
 			listar.add(usuario);
 		}
 
@@ -104,6 +106,7 @@ public class DaoUsuario {
 			usuario.setLogin(result.getString("login"));
 			usuario.setPasswd(result.getString("passwd"));
 			usuario.setUser(result.getString("username"));
+			usuario.setFone(result.getString("fone"));
 
 			return usuario;
 
@@ -115,12 +118,14 @@ public class DaoUsuario {
 	public void atualizarUser(BeanCursoJsp usuario) {
 
 		try {
-			String sql = "update usuario set login = ?, passwd = ?, username = ? where id=" + usuario.getId();
+			String sql = "update usuario set login = ?, passwd = ?, username = ? , fone = ? where id="
+					+ usuario.getId();
 			PreparedStatement stm = connection.prepareStatement(sql);
 
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getPasswd());
 			stm.setString(3, usuario.getUser());
+			stm.setString(4, usuario.getFone());
 
 			stm.executeUpdate();
 			connection.commit();
@@ -134,6 +139,19 @@ public class DaoUsuario {
 			}
 			e.printStackTrace();
 		}
+
+	}
+
+	public boolean validarLogin(String login) throws Exception {
+
+		String sql = "select count(1) as qt_user from usuario where login ='" + login + "'";
+		PreparedStatement stm = connection.prepareStatement(sql);
+		ResultSet result = stm.executeQuery();
+
+		if (result.next()) {
+			return result.getInt("qt_user") <= 0;
+		}
+		return false;
 
 	}
 

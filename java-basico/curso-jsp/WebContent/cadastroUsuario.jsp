@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Cadastro de Usuário</title>
+
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -25,49 +25,74 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+<title>Cadastro de Usuário</title>
+
 </head>
 <body>
 	<div class="container">
 
-		<form action="salvarUsuario" method="post">
+		<div class="card text-white bg-primary">
+			<div class="card-header">Cadastro de Usuário</div>
+		</div>
+
+
+		<form action="salvarUsuario" method="post" id="formUser">
 
 			<fieldset class="form-group">
 				<div class="row">
 
 					<div class="col-md-9">
+
+
+						<c:if test="${not empty msg}">
+							<p>
+							<div class="alert alert-danger" role="alert">${msg}</div>
+							</p>
+						</c:if>
 						<div class="form-group">
-							<label for="username">Código</label> <input type="text"
+							<label for="id">Código</label> <input type="text"
 								class="col-1  form-control" id="id" placeholder="" name="id"
 								readonly="readonly" value="${user.id}">
-						</div>
-						<div class="form-group">
-							<label for="user">Usuário:</label> <input type="text"
-								class="form-control col-md-4" id="user" placeholder="Usuario"
-								name="user" value="${user.user}">
 						</div>
 
 						<div class="form-group">
 							<label for="login">Login:</label> <input type="text"
 								class="form-control col-md-4" id="login" placeholder="Usuario"
-								name="login" value="${user.login}">
+								name="login" ${edit} value="${user.login}">
 						</div>
 
 
 						<div class="form-group">
 							<label for="passwd">Senha:</label> <input type="password"
-								class="form-control col-md-4" id="password" placeholder="Senha"
+								class="form-control col-md-4" id="passwd" placeholder="Senha"
 								name="passwd" value="${user.passwd}">
+						</div>
+						<div class="form-group">
+							<label for="user">Usuário:</label> <input type="text"
+								class="form-control col-md-4" id="user" placeholder="Usuário"
+								name="user" value="${user.user}">
+						</div>
+
+						<div class="form-group">
+							<label for="fone">Fone:</label> <input type="tel"
+								class="fone form-control col-md-4" id="fone" placeholder="Fone"
+								name="fone" value="${user.fone}"
+								pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
 						</div>
 					</div>
 				</div>
-				<div class="form-group row">
-				<div class="col-4">
-					<button type="submit" class="btn btn-primary">Salvar</button>
-				</div>
-			</div>
-			</fieldset>
 
-			
+				<div class="form-group row">
+					<div class="col-4">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a href="salvarUsuario?acao=listaruser">
+							<button type="button" class="btn btn-danger">Cancelar</button>
+						</a>
+					</div>
+				</div>
+			</fieldset>
 		</form>
 	</div>
 
@@ -80,8 +105,8 @@
 						<tr>
 							<th>Código</th>
 							<th>Usuário</th>
+							<th>Fone</th>
 							<th>Login</th>
-							<th>Senha</th>
 							<th>Ação</th>
 
 						</tr>
@@ -93,10 +118,10 @@
 
 								<td style="width: 150px"><c:out value="${user.id }"></c:out></td>
 								<td><c:out value="${user.user }"></c:out></td>
+								<td><c:out value="${user.fone }"></c:out></td>
 								<td><c:out value="${user.login }"></c:out></td>
-								<td><c:out value="${user.passwd }"></c:out></td>
 
-								<td><a href="salvarUsuario?acao=delete&id=${user.id }"><button
+								<td><a href="salvarUsuario?acao=delete&id=${user.id}"><button
 											class="btn btn-danger" title="Excluir">
 											<i class="far fa-trash-alt"></i>
 										</button></a> <a href="salvarUsuario?acao=editar&id=${user.id }"><button
@@ -115,4 +140,24 @@
 	</div>
 
 </body>
+
+
+<script type="text/javascript">
+	jQuery("input.fone").mask("(99) 9999-9999?9").focusout(
+			function(event) {
+				var target, phone, element;
+				target = (event.currentTarget) ? event.currentTarget
+						: event.srcElement;
+				phone = target.value.replace(/\D/g, '');
+				element = $(target);
+				element.unmask();
+				if (phone.length > 10) {
+					element.mask("(99) 99999-999?9");
+				} else {
+					element.mask("(99) 9999-9999?9");
+				}
+			});
+</script>
+
+
 </html>

@@ -10,7 +10,7 @@
 <h3>Seja bem Vindo a Geek Home</h3>
 
 
-<a href="cadastroUsuario.jsp">Cadastro de Usuário</a>
+<a href="salvarUsuario?acao=listaruser"><img alt="Cadastro de Usuário" src="resources/img/userAdd.ico" title="Cadastro de Usuário"></a>
 
 
 </body>
