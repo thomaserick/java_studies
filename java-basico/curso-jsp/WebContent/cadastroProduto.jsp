@@ -154,7 +154,6 @@ function calcular() {
 
 
 function validarCampos(){
-	
     
 	
 	if(document.getElementById('descricao').value == '' ){
