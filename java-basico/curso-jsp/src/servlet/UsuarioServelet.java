@@ -13,16 +13,16 @@ import beans.BeanCursoJsp;
 import dao.DaoUsuario;
 
 /**
- * Servlet implementation class Usuario
+ * Servlet implementation class Usuário
  */
 
 @WebServlet("/salvarUsuario")
-public class Usuario extends HttpServlet {
+public class UsuarioServelet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private DaoUsuario daousuario = new DaoUsuario();
 
-	public Usuario() {
+	public UsuarioServelet() {
 		super();
 
 	}
@@ -94,18 +94,44 @@ public class Usuario extends HttpServlet {
 		usuario.setFone(fone);
 
 		try {
-			if (id == null || id.isEmpty() || usuario.getId() == 0) {
-				if (daousuario.validarLogin(login)) {
-					daousuario.salvarUsuario(usuario);
-				} else {
 
-					request.setAttribute("user", usuario);
+			String msg = null;
+			boolean checkField = true;
 
-					request.setAttribute("msg", "Usuário já existe com o mesmo login!");
-				}
-			} else {
-				daousuario.atualizarUser(usuario);
+			if (login == null || login.isEmpty()) {
+				msg = "Login deve ser Informado!";
+				checkField = false;
 			}
+
+			if (passwd == null || passwd.isEmpty()) {
+				msg = "Senha deve ser Informada!";
+				checkField = false;
+			}
+			if (user == null || user.isEmpty()) {
+				msg = "Usuário deve ser Informado!";
+				checkField = false;
+			}
+			if (fone == null || fone.isEmpty()) {
+				msg = "Telefone deve ser Informado!";
+				checkField = false;
+			}
+
+			if (checkField) {
+
+				if (id == null || id.isEmpty() || usuario.getId() == 0) {
+					if (daousuario.validarLogin(login)) {
+						daousuario.salvarUsuario(usuario);
+					} else {
+
+						request.setAttribute("user", usuario);
+
+						msg = "Usuário já existe com o mesmo login!";
+					}
+				} else {
+					daousuario.atualizarUser(usuario);
+				}
+			}
+			request.setAttribute("msg", msg);
 
 			RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
 			request.setAttribute("usuarios", daousuario.listar());

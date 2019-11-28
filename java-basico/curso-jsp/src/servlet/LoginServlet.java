@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 
 		try {
 			if (daoLogin.validarLogin(login, passwd)) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoLiberado.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 				dispatcher.forward(request, response);
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoNegado.jsp");
