@@ -85,4 +85,71 @@ public class DaoProduto {
 		return false;
 	}
 
+	public BeanProduto consultar(Long id) throws Exception {
+
+		String sql = "SELECT * FROM produto WHERE id =" + id;
+		PreparedStatement stm = connection.prepareStatement(sql);
+		ResultSet result = stm.executeQuery();
+
+		if (result.next()) {
+			BeanProduto produto = new BeanProduto();
+			produto.setId(result.getLong("id"));
+			produto.setDescricao(result.getString("descricao"));
+			produto.setQuantidade(result.getDouble("quantidade"));
+			produto.setValor(result.getDouble("valor"));
+
+			return produto;
+		}
+
+		return null;
+
+	}
+
+	public void delete(Long id) {
+
+		String sql = "delete from produto where = " + id;
+
+		try {
+			PreparedStatement stm = connection.prepareStatement(sql);
+			stm.execute();
+
+			connection.commit();
+
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+			e.printStackTrace();
+		}
+
+	}
+
+	public void atualizarProduto(BeanProduto produto) {
+
+		String sql = "update produto set descricao = ?, quantidade = ?, valor = ? where id= " + produto.getId();
+		try {
+
+			PreparedStatement stm = connection.prepareStatement(sql);
+
+			stm.setString(1, produto.getDescricao());
+			stm.setDouble(2, produto.getQuantidade());
+			stm.setDouble(3, produto.getValor());
+
+			stm.executeUpdate();
+			connection.commit();
+
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+
+	}
+
 }

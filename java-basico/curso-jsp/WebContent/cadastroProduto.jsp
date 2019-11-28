@@ -59,16 +59,23 @@
 						</div>
 
 						<div class="form-group">
-							<label for="quantidade">Quantidade:</label> <input type="text"
-								class="form-control col-md-4 money" id="quantidade" placeholder="Quantidade"
-								name="quantidade" value="${prod.quantidade}">
+							<label for="quantidade">Quantidade:</label> <input type="number"
+								class="form-control col-md-4 " id="quantidade" onchange="calcular()" placeholder="0.00"
+								name="quantidade" value="${prod.quantidade}" step="0.01" >
 						</div>
 
 						<div class="form-group">
-							<label for="fone">Valor:</label> <input type="text"
-								class="form-control col-md-4 money" id="valor" placeholder="Valor"
+							<label for="fone">Valor:</label> <input  min="0" step=".10" type="number"
+								class="form-control col-md-4 " id="valor" onchange="calcular()" placeholder="0.00"
 								name="valor" value="${prod.valor}" >
 						</div>
+						
+						<div class="form-group">
+							<label for="fone">Total:</label> <input type="number" step=".10"
+								class="form-control col-md-4 " id="total" placeholder="Total"
+								name="total" readonly="readonly" value="" >
+						</div>				
+						
 					</div>
 				</div>
 
@@ -94,7 +101,7 @@
 							<th>Código</th>
 							<th>Descrição</th>
 							<th>Quantidade</th>
-							<th>Valor</th>
+							<th>Valor R$</th>
 							<th>Ação</th>
 
 						</tr>
@@ -106,8 +113,8 @@
 
 								<td style="width: 150px"><c:out value="${prod.id}"></c:out></td>
 								<td><c:out value="${prod.descricao }"></c:out></td>
-								<td><c:out value="${prod.quantidade }"></c:out></td>
-								<td><c:out value="${prod.valor }"></c:out></td>
+								<td class=""><c:out value="${prod.quantidade}"></c:out></td>
+								<td class=""><c:out value="${prod.valor}"></c:out></td>
 
 								<td><a href="salvarProduto?acao=delete&id=${prod.id}"><button
 											class="btn btn-danger" title="Excluir">
@@ -131,7 +138,21 @@
 
 <script type="text/javascript">
 
-$('.money').mask("#.##0,00", {reverse: true});
+function calcular() {
+	  var qtde = parseFloat(document.getElementById('quantidade').value);
+	  var valor = parseFloat(document.getElementById('valor').value);
+	  
+	  var total = qtde + valor
+	  
+	  document.getElementById('total').value = total.toFixed(2);
+
+	}
+
+
+$('.qtde').mask("#.##0.00", {reverse: true});
+
+$(".money").mask("R$###.###.###,##");
+
 	
 </script>
 

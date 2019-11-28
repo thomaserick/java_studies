@@ -27,10 +27,8 @@ public class ProdutoServelet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String acao = request.getParameter("acao");
-		/*
-		 * Long id = Long.parseLong(request.getParameter("id") != null ?
-		 * request.getParameter("id") : "0");
-		 */
+
+		Long id = Long.parseLong(request.getParameter("id") != null ? request.getParameter("id") : "0");
 
 		try {
 
@@ -39,6 +37,20 @@ public class ProdutoServelet extends HttpServlet {
 				try {
 					RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 					request.setAttribute("produto", daoproduto.listar());
+					view.forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+			if (acao.contentEquals("editar")) {
+
+				BeanProduto produto = daoproduto.consultar(id);
+				request.setAttribute("edit", "readonly");
+
+				try {
+					RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
+					request.setAttribute("prod", produto);
 					view.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -104,9 +116,9 @@ public class ProdutoServelet extends HttpServlet {
 
 					}
 				} else {
-					/*
-					 * daoproduto.atualizarPrduto(produto);
-					 */
+
+					daoproduto.atualizarProduto(produto);
+
 				}
 			}
 
