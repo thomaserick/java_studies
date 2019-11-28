@@ -105,9 +105,9 @@ public class DaoProduto {
 
 	}
 
-	public void delete(Long id) {
+	public void deleteProduto(Long id) {
 
-		String sql = "delete from produto where = " + id;
+		String sql = "delete from produto where id = " + id;
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);

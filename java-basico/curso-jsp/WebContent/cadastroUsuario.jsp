@@ -38,7 +38,8 @@
 		</div>
 
 
-		<form action="salvarUsuario" method="post" id="formUser">
+		<form action="salvarUsuario" method="post" id="formUser"
+			onsubmit="return validarCampos()">
 			<fieldset class="form-group">
 				<div class="row">
 					<div class="col-md-9">
@@ -142,7 +143,8 @@
 	jQuery("input.fone").mask("(99) 9999-9999?9").focusout(
 			function(event) {
 				var target, phone, element;
-				target = (event.currentTarget) ? event.currentTarget
+				target = (event.currentTarget)
+						? event.currentTarget
 						: event.srcElement;
 				phone = target.value.replace(/\D/g, '');
 				element = $(target);
@@ -153,6 +155,28 @@
 					element.mask("(99) 9999-9999?9");
 				}
 			});
+
+	function validarCampos() {		
+
+		if ( document.getElementById("login").value == '') {
+			alert('Informe o Login');
+			return false;
+		} else if ( document.getElementById("passwd").value == '') {
+			alert('Informe a Senha');
+			return false;
+		} else if ( document.getElementById("user").value == '') {
+			alert('Informe o Usuário');
+			return false;
+		} else if ( document.getElementById("fone").value == '') {
+			alert('Informe o Telefone');
+			return false;
+		}
+		
+		
+		return true;
+	
+
+	}
 </script>
 
 

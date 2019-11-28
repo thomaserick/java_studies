@@ -56,6 +56,20 @@ public class ProdutoServelet extends HttpServlet {
 					e.printStackTrace();
 				}
 
+			} else if (acao.equalsIgnoreCase("delete")) {
+
+				daoproduto.deleteProduto(id);
+
+				try {
+
+					RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
+					request.setAttribute("produto", daoproduto.listar());
+					view.forward(request, response);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 			}
 
 		} catch (Exception e) {
@@ -88,16 +102,18 @@ public class ProdutoServelet extends HttpServlet {
 			String msg = null;
 			boolean checkFields = true;
 
-			if (descricao == null || descricao.isEmpty()) {
-				msg = "Descrição deve ser informada!";
+			if (valor == null || valor.isEmpty()) {
+				msg = "Valor deve ser informado!";
 				checkFields = false;
 			}
+
 			if (quantidade == null || quantidade.isEmpty()) {
 				msg = "Quantidade deve ser informada!";
 				checkFields = false;
 			}
-			if (valor == null || valor.isEmpty()) {
-				msg = "Valor deve ser informado!";
+
+			if (descricao == null || descricao.isEmpty()) {
+				msg = "Descrição deve ser informada!";
 				checkFields = false;
 			}
 

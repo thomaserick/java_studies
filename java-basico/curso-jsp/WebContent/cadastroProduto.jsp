@@ -36,7 +36,7 @@
 		</div>
 
 
-		<form action="salvarProduto" method="post" id="formProduto">
+		<form action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos();">
 
 			<fieldset class="form-group">
 				<div class="row">
@@ -138,10 +138,14 @@
 
 <script type="text/javascript">
 
+
+
 function calcular() {
+	
 	  var qtde = parseFloat(document.getElementById('quantidade').value);
 	  var valor = parseFloat(document.getElementById('valor').value);
 	  
+	 	  
 	  var total = qtde + valor
 	  
 	  document.getElementById('total').value = total.toFixed(2);
@@ -149,9 +153,30 @@ function calcular() {
 	}
 
 
+function validarCampos(){
+	
+    
+	
+	if(document.getElementById('descricao').value == '' ){
+		alert('Informe a Descrição');
+		return false;		
+	}else if (document.getElementById('quantidade').value == ''){
+		alert("Informe a Quantidade");
+		return false;
+	}else if (document.getElementById('valor').value == ''){
+		alert("Informe o Valor");
+		return false;
+	}
+	
+	return true;
+	
+}
+
 $('.qtde').mask("#.##0.00", {reverse: true});
 
 $(".money").mask("R$###.###.###,##");
+
+
 
 	
 </script>
