@@ -4,14 +4,14 @@
 ### Conhecimentos ..
 
 - [x] Lógica de Programação
-- Java Iniciante
-- OO
-- Java Web
-- Configuração Ambiente (Eclipse)
-- Arquitetura e Conceitos
-- Frond-End e Back-End
-- Sql e JDBC
-- Servelets e Jsp
+- [x] Java Iniciante
+- [x] OOP
+- [x] Java Web
+- [x] Configuração Ambiente (Eclipse)
+- [x] Arquitetura e Conceitos
+- [x] Frond-End e Back-End
+- [x] Sql e JDBC
+- [x] Servelets e Jsp
 - JSP + Sping MVC + JPA
 - Aplicações Java
 - APi RESTful e Micro Serviços em Spring Boot
