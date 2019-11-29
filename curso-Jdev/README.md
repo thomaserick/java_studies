@@ -3,7 +3,7 @@
 
 ### Conhecimentos ..
 
-- Lógica de Programação
+- [x] Lógica de Programação
 - Java Iniciante
 - OO
 - Java Web
@@ -25,6 +25,14 @@
 - Hospedagem
 - ........
 
+## Projetos
+
+- [Servlets e JSP](https://github.com/thomaserick/java_studies/tree/master/curso-Jdev/curso-jsp)
+
+
+**Helpers**
+
+- [Format GitHub](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
 	
  
