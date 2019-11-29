@@ -4,7 +4,7 @@ Estudos em Java
 
 ## Cursos
 
-- [JdevTreinamentos](https://github.com/thomaserick/java_studies/tree/master/curso-Jdev)
+- [Full Stack](https://github.com/thomaserick/java_studies/tree/master/curso-Jdev)
 - [Curso em Video](https://github.com/thomaserick/java_studies/tree/master/poo)
 
 ## Programadores Java
