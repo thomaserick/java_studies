@@ -108,13 +108,12 @@
 							</div>
 						</div>
 
-
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="cep">Cep:</label> <input type="text"
 										class="form-control col-md-8" id="cep" placeholder="CEP"
-										name="cep" value="" required="" value="" maxlength="8"
+										name="cep" required="" value="${user.cep}" maxlength="8"
 										pattern="[0-9]+$">
 								</div>
 							</div>
@@ -123,24 +122,24 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="rua">Endereço:</label> <input type="text"
-										class="form-control" id="rua" placeholder="Rua" name="rua"
-										value="${user.rua}">
+									<label for="endereco">Endereço:</label> <input type="text"
+										class="form-control" id="endereco" placeholder="Rua"
+										name="endereco" value="${user.endereco}">
 								</div>
 							</div>
-							
+
 							<div class="col-md-1">
 								<div class="form-group">
-									<label for="numend">N°:</label> <input type="text"
-										class="form-control" id="numend" placeholder=""
-										name="numend" value="${user.bairro}">
+									<label for="endum">N°:</label> <input type="text"
+										class="form-control" id="endNum" placeholder="" name="endNum"
+										value="${user.endNum}">
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="form-group">
 									<label for="bairro">Bairro:</label> <input type="text"
 										class="form-control" id="bairro" placeholder="Bairro"
-										name="fone" value="${user.bairro}">
+										name="bairro" value="${user.bairro}">
 								</div>
 							</div>
 						</div>
@@ -187,6 +186,11 @@
 							<th>Usuário</th>
 							<th>Fone</th>
 							<th>Login</th>
+							<th>CEP</th>
+							<th>Endereço</th>
+							<th>Bairro</th>
+							<th>Cidade</th>
+							<th>UF</th>
 							<th>Ação</th>
 
 						</tr>
@@ -196,20 +200,27 @@
 						<c:forEach items="${usuarios}" var="user">
 							<tr>
 
-								<td style="width: 150px"><c:out value="${user.id }"></c:out></td>
+								<td style="width: 50px"><c:out value="${user.id }"></c:out></td>
 								<td><c:out value="${user.user }"></c:out></td>
 								<td><c:out value="${user.fone }"></c:out></td>
 								<td><c:out value="${user.login }"></c:out></td>
 
-								<td><a href="salvarUsuario?acao=delete&id=${user.id}"><button
-											class="btn btn-danger" title="Excluir">
-											<i class="far fa-trash-alt"></i>
+								<td><c:out value="${user.cep }"></c:out></td>
+								<td><c:out value="${user.endereco }, ${user.endNum}"></c:out></td>
+								<td><c:out value="${user.bairro }"></c:out></td>
+								<td><c:out value="${user.cidade }"></c:out></td>
+								<td><c:out value="${user.uf }"></c:out></td>
+
+								<td><a href="salvarTelefones&id=${user.id }"><button
+											class="btn btn-secondary" title="Telefones">
+											<i class="fas fa-phone"></i>
 										</button></a> <a href="salvarUsuario?acao=editar&id=${user.id }"><button
 											class="btn btn-primary" title="Editar">
 											<i class="fas fa-user-edit"></i>
-										</button></a> <span class="glyphicon glyphicon-trash"></span></td>
-
-
+										</button></a> <a href="salvarUsuario?acao=delete&id=${user.id}"><button
+											class="btn btn-danger" title="Excluir">
+											<i class="far fa-trash-alt"></i>
+										</button></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -260,7 +271,7 @@
 
 				function limpa_formulário_cep() {
 					// Limpa valores do formulário de cep.
-					$("#rua").val("");
+					$("#endereco").val("");
 					$("#bairro").val("");
 					$("#cidade").val("");
 					$("#uf").val("");
@@ -283,7 +294,7 @@
 								if (validacep.test(cep)) {
 
 									//Preenche os campos com "..." enquanto consulta webservice.
-									$("#rua").val("...");
+									$("#endereco").val("...");
 									$("#bairro").val("...");
 									$("#cidade").val("...");
 									$("#uf").val("...");
@@ -295,7 +306,8 @@
 
 										if (!("erro" in dados)) {
 											//Atualiza os campos com os valores da consulta.
-											$("#rua").val(dados.logradouro);
+											$("#endereco")
+													.val(dados.logradouro);
 											$("#bairro").val(dados.bairro);
 											$("#cidade").val(dados.localidade);
 											$("#uf").val(dados.uf);
@@ -319,7 +331,5 @@
 							}
 						});
 			});
-	
-	
 </script>
 </html>

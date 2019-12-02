@@ -85,6 +85,13 @@ public class UsuarioServelet extends HttpServlet {
 		String user = request.getParameter("user");
 		String fone = request.getParameter("fone");
 
+		String cep = request.getParameter("cep");
+		String endereco = request.getParameter("endereco");
+		String endnum = request.getParameter("endNum");
+		String bairro = request.getParameter("bairro");
+		String cidade = request.getParameter("cidade");
+		String uf = request.getParameter("uf");
+
 		BeanCursoJsp usuario = new BeanCursoJsp();
 		usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
 
@@ -92,6 +99,14 @@ public class UsuarioServelet extends HttpServlet {
 		usuario.setPasswd(passwd);
 		usuario.setUser(user);
 		usuario.setFone(fone);
+
+		usuario.setCep(cep);
+		usuario.setEndereco(endereco);
+		usuario.setEndNum(endnum);
+
+		usuario.setCidade(cidade);
+		usuario.setBairro(bairro);
+		usuario.setUf(uf);
 
 		try {
 

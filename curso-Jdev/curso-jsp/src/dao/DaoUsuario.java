@@ -21,7 +21,7 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username, fone) values (?, ?, ?, ?)";
+		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -29,6 +29,13 @@ public class DaoUsuario {
 			stm.setString(2, usuario.getPasswd());
 			stm.setString(3, usuario.getUser());
 			stm.setString(4, usuario.getFone());
+			stm.setString(5, usuario.getCep());
+			stm.setString(6, usuario.getEndereco());
+			stm.setString(7, usuario.getEndNum());
+			stm.setString(8, usuario.getBairro());
+			stm.setString(9, usuario.getCidade());
+			stm.setString(10, usuario.getUf());
+
 			stm.execute();
 			connection.commit();
 		} catch (Exception e) {
@@ -64,6 +71,13 @@ public class DaoUsuario {
 			usuario.setPasswd(result.getString("passwd"));
 			usuario.setUser(result.getString("username"));
 			usuario.setFone(result.getString("fone"));
+			usuario.setCep(result.getString("cep"));
+			usuario.setEndereco(result.getString("endereco"));
+			usuario.setEndNum(result.getString("endnum"));
+			usuario.setCidade(result.getString("cidade"));
+			usuario.setBairro(result.getString("bairro"));
+			usuario.setUf(result.getString("uf"));
+
 			listar.add(usuario);
 		}
 
@@ -107,6 +121,12 @@ public class DaoUsuario {
 			usuario.setPasswd(result.getString("passwd"));
 			usuario.setUser(result.getString("username"));
 			usuario.setFone(result.getString("fone"));
+			usuario.setCep(result.getString("cep"));
+			usuario.setEndereco(result.getString("endereco"));
+			usuario.setEndNum(result.getString("endnum"));
+			usuario.setCidade(result.getString("cidade"));
+			usuario.setBairro(result.getString("bairro"));
+			usuario.setUf(result.getString("uf"));
 
 			return usuario;
 
@@ -118,7 +138,7 @@ public class DaoUsuario {
 	public void atualizarUser(BeanCursoJsp usuario) {
 
 		try {
-			String sql = "update usuario set login = ?, passwd = ?, username = ? , fone = ? where id="
+			String sql = "update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?, cidade = ?, uf = ? where id="
 					+ usuario.getId();
 			PreparedStatement stm = connection.prepareStatement(sql);
 
@@ -126,6 +146,12 @@ public class DaoUsuario {
 			stm.setString(2, usuario.getPasswd());
 			stm.setString(3, usuario.getUser());
 			stm.setString(4, usuario.getFone());
+			stm.setString(5, usuario.getCep());
+			stm.setString(6, usuario.getEndereco());
+			stm.setString(7, usuario.getEndNum());
+			stm.setString(8, usuario.getBairro());
+			stm.setString(9, usuario.getCidade());
+			stm.setString(10, usuario.getUf());
 
 			stm.executeUpdate();
 			connection.commit();
