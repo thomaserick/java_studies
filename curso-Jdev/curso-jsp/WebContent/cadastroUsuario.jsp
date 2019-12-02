@@ -34,7 +34,23 @@
 	<div class="container">
 
 		<div class="card text-white bg-primary">
-			<div class="card-header">Cadastro de Usuário</div>
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-6">
+						<span style="font-size: 30px;">Cadastro de Usuário</span>
+					</div>
+					<div class="col-md-6">
+						<ul class="nav nav-pills card-header-pills justify-content-end">
+							<li class="nav-item"><a class="nav-link" href="home.jsp"
+								title="Home"><i class="fas fa-home fa-2x"
+									style="color: white;"></i></a></li>
+							<li class="nav-item"><a class="nav-link" href="index.jsp"
+								title="Sair"><i class="fas fa-sign-out-alt fa-2x"
+									style="color: white;"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 
 
@@ -42,11 +58,13 @@
 			onsubmit="return validarCampos()">
 			<fieldset class="form-group">
 				<div class="row">
-					<div class="col-md-9">
+
+					<div class="col-md-12">
 						<c:if test="${not empty msg}">
 							<p>
 							<div class="alert alert-danger" role="alert">${msg}</div>
-							</p>
+
+
 						</c:if>
 						<div class="form-group">
 							<label for="id">Código</label> <input type="text"
@@ -54,29 +72,94 @@
 								readonly="readonly" value="${user.id}">
 						</div>
 
-						<div class="form-group">
-							<label for="login">Login:</label> <input type="text"
-								class="form-control col-md-4" id="login" placeholder="Usuario"
-								name="login" ${edit} value="${user.login}">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="login">Login:</label> <input type="text"
+										class="form-control col-md-6" id="login" placeholder="Usuario"
+										name="login" ${edit} value="${user.login}">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="passwd">Senha:</label> <input type="password"
+										class="form-control col-md-6" id="passwd" placeholder="Senha"
+										name="passwd" value="${user.passwd}">
+								</div>
+							</div>
 						</div>
 
 
-						<div class="form-group">
-							<label for="passwd">Senha:</label> <input type="password"
-								class="form-control col-md-4" id="passwd" placeholder="Senha"
-								name="passwd" value="${user.passwd}">
-						</div>
-						<div class="form-group">
-							<label for="user">Usuário:</label> <input type="text"
-								class="form-control col-md-4" id="user" placeholder="Usuário"
-								name="user" value="${user.user}">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="user">Usuário:</label> <input type="text"
+										class="form-control col-md-8" id="user" placeholder="Usuário"
+										name="user" value="${user.user}">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="fone">Fone:</label> <input type="tel"
+										class="fone form-control col-md-6" id="fone"
+										placeholder="Fone" name="fone" value="${user.fone}"
+										pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+								</div>
+							</div>
 						</div>
 
-						<div class="form-group">
-							<label for="fone">Fone:</label> <input type="tel"
-								class="fone form-control col-md-4" id="fone" placeholder="Fone"
-								name="fone" value="${user.fone}"
-								pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="cep">Cep:</label> <input type="text"
+										class="form-control col-md-8" id="cep" placeholder="CEP"
+										name="cep" value="" required="" value="" maxlength="8"
+										pattern="[0-9]+$">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="rua">Endereço:</label> <input type="text"
+										class="form-control" id="rua" placeholder="Rua" name="rua"
+										value="${user.rua}">
+								</div>
+							</div>
+							
+							<div class="col-md-1">
+								<div class="form-group">
+									<label for="numend">N°:</label> <input type="text"
+										class="form-control" id="numend" placeholder=""
+										name="numend" value="${user.bairro}">
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group">
+									<label for="bairro">Bairro:</label> <input type="text"
+										class="form-control" id="bairro" placeholder="Bairro"
+										name="fone" value="${user.bairro}">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="cidade">Cidade:</label> <input type="text"
+										class="form-control" id="cidade" placeholder="Cidade"
+										name="cidade" value="${user.cidade}">
+								</div>
+							</div>
+							<div class="col-md-1">
+								<div class="form-group">
+									<label for="uf">Estado:</label> <input type="text"
+										class="form-control" id="uf" placeholder=UF name="uf"
+										value="${user.uf}">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -143,8 +226,7 @@
 	jQuery("input.fone").mask("(99) 9999-9999?9").focusout(
 			function(event) {
 				var target, phone, element;
-				target = (event.currentTarget)
-						? event.currentTarget
+				target = (event.currentTarget) ? event.currentTarget
 						: event.srcElement;
 				phone = target.value.replace(/\D/g, '');
 				element = $(target);
@@ -156,28 +238,88 @@
 				}
 			});
 
-	function validarCampos() {		
-
-		if ( document.getElementById("login").value == '') {
-			alert('Informe o Login');
+	function validarCampos() {
+		if (document.getElementById("login").value == '') {
+			alert('Informe Login');
 			return false;
-		} else if ( document.getElementById("passwd").value == '') {
+		} else if (document.getElementById("passwd").value == '') {
 			alert('Informe a Senha');
 			return false;
-		} else if ( document.getElementById("user").value == '') {
+		} else if (document.getElementById("user").value == '') {
 			alert('Informe o Usuário');
 			return false;
-		} else if ( document.getElementById("fone").value == '') {
+		} else if (document.getElementById("fone").value == '') {
 			alert('Informe o Telefone');
 			return false;
 		}
-		
-		
 		return true;
-	
-
 	}
+
+	$(document).ready(
+			function() {
+
+				function limpa_formulário_cep() {
+					// Limpa valores do formulário de cep.
+					$("#rua").val("");
+					$("#bairro").val("");
+					$("#cidade").val("");
+					$("#uf").val("");
+				}
+
+				//Quando o campo cep perde o foco.
+				$("#cep").blur(
+						function() {
+
+							//Nova variável "cep" somente com dígitos.
+							var cep = $(this).val().replace(/\D/g, '');
+
+							//Verifica se campo cep possui valor informado.
+							if (cep != "") {
+
+								//Expressão regular para validar o CEP.
+								var validacep = /^[0-9]{8}$/;
+
+								//Valida o formato do CEP.
+								if (validacep.test(cep)) {
+
+									//Preenche os campos com "..." enquanto consulta webservice.
+									$("#rua").val("...");
+									$("#bairro").val("...");
+									$("#cidade").val("...");
+									$("#uf").val("...");
+
+									//Consulta o webservice viacep.com.br/
+									$.getJSON("https://viacep.com.br/ws/" + cep
+											+ "/json/?callback=?", function(
+											dados) {
+
+										if (!("erro" in dados)) {
+											//Atualiza os campos com os valores da consulta.
+											$("#rua").val(dados.logradouro);
+											$("#bairro").val(dados.bairro);
+											$("#cidade").val(dados.localidade);
+											$("#uf").val(dados.uf);
+										} //end if.
+										else {
+											//CEP pesquisado não foi encontrado.
+											limpa_formulário_cep();
+											alert("CEP não encontrado.");
+										}
+									});
+								} //end if.
+								else {
+									//cep é inválido.
+									limpa_formulário_cep();
+									alert("Formato de CEP inválido.");
+								}
+							} //end if.
+							else {
+								//cep sem valor, limpa formulário.
+								limpa_formulário_cep();
+							}
+						});
+			});
+	
+	
 </script>
-
-
 </html>

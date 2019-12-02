@@ -23,7 +23,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
 
 <title>Cadastro de Produto</title>
 
@@ -32,11 +33,24 @@
 	<div class="container">
 
 		<div class="card text-white bg-primary">
-			<div class="card-header">Cadastro de Produto</div>
+			<div class="card-header">
+				<div class="row">
+					<div class="col-6">
+						<span style="font-size:30px;">Cadastro de Produto</span>
+					</div>
+					<div class="col-6">
+						<ul class="nav nav-pills card-header-pills justify-content-end">
+							<li class="nav-item"><a class="nav-link" href="home.jsp" title="Home"><i class="fas fa-home fa-2x" style="color:white;"></i></a></li>
+							<li class="nav-item"><a class="nav-link" href="index.jsp" title="Sair"><i class="fas fa-sign-out-alt fa-2x" style="color:white;"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 
 
-		<form action="salvarProduto" method="post" id="formProduto" onsubmit="return validarCampos();">
+		<form action="salvarProduto" method="post" id="formProduto"
+			onsubmit="return validarCampos();">
 
 			<fieldset class="form-group">
 				<div class="row">
@@ -44,7 +58,7 @@
 						<c:if test="${not empty msg}">
 							<p>
 							<div class="alert alert-danger" role="alert">${msg}</div>
-							</p>						
+							</p>
 						</c:if>
 						<div class="form-group">
 							<label for="id">Código</label> <input type="text"
@@ -54,28 +68,31 @@
 
 						<div class="form-group">
 							<label for="login">Descrição</label> <input type="text"
-								class="form-control col-md-4" id="descricao" placeholder="Descrição"
-								name="descricao" ${edit} value="${prod.descricao}">
+								class="form-control col-md-4" id="descricao"
+								placeholder="Descrição" name="descricao" ${edit}
+								value="${prod.descricao}">
 						</div>
 
 						<div class="form-group">
 							<label for="quantidade">Quantidade:</label> <input type="number"
-								class="form-control col-md-4 " id="quantidade" onchange="calcular()" placeholder="0.00"
-								name="quantidade" value="${prod.quantidade}" step="0.01" >
+								class="form-control col-md-4 " id="quantidade"
+								onchange="calcular()" placeholder="0.00" name="quantidade"
+								value="${prod.quantidade}" step="0.01">
 						</div>
 
 						<div class="form-group">
-							<label for="fone">Valor:</label> <input  min="0" step=".10" type="number"
-								class="form-control col-md-4 " id="valor" onchange="calcular()" placeholder="0.00"
-								name="valor" value="${prod.valor}" >
+							<label for="fone">Valor:</label> <input min="0" step=".10"
+								type="number" class="form-control col-md-4 " id="valor"
+								onchange="calcular()" placeholder="0.00" name="valor"
+								value="${prod.valor}">
 						</div>
-						
+
 						<div class="form-group">
 							<label for="fone">Total:</label> <input type="number" step=".10"
 								class="form-control col-md-4 " id="total" placeholder="Total"
-								name="total" readonly="readonly" value="" >
-						</div>				
-						
+								name="total" readonly="readonly" value="">
+						</div>
+
 					</div>
 				</div>
 
@@ -91,7 +108,7 @@
 		</form>
 	</div>
 
-	 <div class="container">
+	<div class="container">
 		<div class="row justify-content-center">
 
 			<div class="table-responsive">
@@ -119,11 +136,10 @@
 								<td><a href="salvarProduto?acao=delete&id=${prod.id}"><button
 											class="btn btn-danger" title="Excluir">
 											<i class="far fa-trash-alt"></i>
-										</button></a> 
-										
-										<a href="salvarProduto?acao=editar&id=${prod.id}"  class="btn btn-primary" title="Editar" >											
-											<i class="fas fa-edit"></i>
-										</a></td>
+										</button></a> <a href="salvarProduto?acao=editar&id=${prod.id}"
+									class="btn btn-primary" title="Editar"> <i
+										class="fas fa-edit"></i>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -131,53 +147,45 @@
 				</table>
 			</div>
 		</div>
-	</div> 
+	</div>
 
 </body>
 
 
 <script type="text/javascript">
+	function calcular() {
 
+		var qtde = parseFloat(document.getElementById('quantidade').value);
+		var valor = parseFloat(document.getElementById('valor').value);
 
+		var total = qtde + valor
 
-function calcular() {
-	
-	  var qtde = parseFloat(document.getElementById('quantidade').value);
-	  var valor = parseFloat(document.getElementById('valor').value);
-	  
-	 	  
-	  var total = qtde + valor
-	  
-	  document.getElementById('total').value = total.toFixed(2);
+		document.getElementById('total').value = total.toFixed(2);
 
 	}
 
+	function validarCampos() {
 
-function validarCampos(){
-    
-	
-	if(document.getElementById('descricao').value == '' ){
-		alert('Informe a Descrição');
-		return false;		
-	}else if (document.getElementById('quantidade').value == ''){
-		alert("Informe a Quantidade");
-		return false;
-	}else if (document.getElementById('valor').value == ''){
-		alert("Informe o Valor");
-		return false;
+		if (document.getElementById('descricao').value == '') {
+			alert('Informe a Descrição');
+			return false;
+		} else if (document.getElementById('quantidade').value == '') {
+			alert("Informe a Quantidade");
+			return false;
+		} else if (document.getElementById('valor').value == '') {
+			alert("Informe o Valor");
+			return false;
+		}
+
+		return true;
+
 	}
-	
-	return true;
-	
-}
 
-$('.qtde').mask("#.##0.00", {reverse: true});
+	$('.qtde').mask("#.##0.00", {
+		reverse : true
+	});
 
-$(".money").mask("R$###.###.###,##");
-
-
-
-	
+	$(".money").mask("R$###.###.###,##");
 </script>
 
 
