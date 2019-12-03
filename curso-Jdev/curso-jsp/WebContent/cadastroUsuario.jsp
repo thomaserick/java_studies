@@ -211,7 +211,7 @@
 								<td><c:out value="${user.cidade }"></c:out></td>
 								<td><c:out value="${user.uf }"></c:out></td>
 
-								<td><a href="salvarTelefones&id=${user.id }"><button
+								<td><a href="salvarTelefones?id=${user.id }"><button
 											class="btn btn-secondary" title="Telefones">
 											<i class="fas fa-phone"></i>
 										</button></a> <a href="salvarUsuario?acao=editar&id=${user.id }"><button
