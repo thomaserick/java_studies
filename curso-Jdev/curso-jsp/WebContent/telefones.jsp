@@ -45,7 +45,7 @@
 								title="Home"><i class="fas fa-home fa-2x"
 									style="color: white;"></i></a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="cadastroUsuario.jsp" title="Voltar"><i
+								href="salvarUsuario?acao=listaruser" title="Voltar"><i
 									class="fas fa-undo fa-2x" style="color: white;"></i></a></li>
 						</ul>
 					</div>
@@ -81,14 +81,14 @@
 								<div class="form-group">
 									<label for="fone">Telefone:</label> <input type="tel"
 										class="fone form-control col-md-6" id="fone"
-										placeholder="(__) ____-_____" name="fone" value="${fone.telefone}"
+										placeholder="(__) ____-_____" name="fone" value=""
 										pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="tipo">Tipo:</label> <select class="form-control col-md-6"
-										id="tipo">
+										id="tipo" name="tipo">
 										<option>Casa</option>
 										<option>Contato</option>
 										<option>Celular</option>
@@ -103,7 +103,7 @@
 
 				<div class="form-group row">
 					<div class="col-4">
-						<button type="submit" class="btn btn-primary">Salvar</button>						
+						<button type="submit" class="btn btn-primary" >Salvar</button>						
 					</div>
 				</div>
 			</fieldset>
@@ -133,7 +133,7 @@
 								<td><c:out value="${fone.telefone }"></c:out></td>
 								<td><c:out value="${fone.tipo }"></c:out></td>
 
-								<td><a href="salvarUsuario?acao=delete&id=${fone.id}"><button
+								<td><a href="salvarTelefones?acao=delete&userId=${userId}&id=${fone.id}"><button
 											class="btn btn-danger" title="Excluir">
 											<i class="far fa-trash-alt"></i>
 										</button></a></td>
@@ -167,9 +167,10 @@
 
 	function validarCampos() {
 		if (document.getElementById("fone").value == '') {
-			alert('Informe o Telefone');
+			alert('Informe o Telefone');		
 			return false;
-		}
+		}	
+	
 		return true;
 	}
 </script>

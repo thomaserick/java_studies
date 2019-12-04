@@ -24,7 +24,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
 
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body>
 
