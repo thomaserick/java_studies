@@ -55,16 +55,13 @@
 
 
 		<form action="salvarUsuario" method="post" id="formUser"
-			onsubmit="return validarCampos()">
+			onsubmit="return validarCampos()" enctype="multipart/form-data">
 			<fieldset class="form-group">
 				<div class="row">
-
 					<div class="col-md-12">
 						<c:if test="${not empty msg}">
 							<p>
 							<div class="alert alert-danger" role="alert">${msg}</div>
-
-
 						</c:if>
 						<div class="form-group">
 							<label for="id">Código</label> <input type="text"
@@ -160,8 +157,21 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="imgUser">Foto:</label>
+									<input type="file" class="form-control-file"
+										id="imgUser">
+								</div>
+							</div>
+						</div>
+
+
 					</div>
 				</div>
+
 
 				<div class="form-group row">
 					<div class="col-4">
@@ -211,7 +221,8 @@
 								<td><c:out value="${user.cidade }"></c:out></td>
 								<td><c:out value="${user.uf }"></c:out></td>
 
-								<td><a href="salvarTelefones?id=${user.id }"><button
+								<td><a
+									href="salvarTelefones?acao=addfone&userId=${user.id }"><button
 											class="btn btn-secondary" title="Telefones">
 											<i class="fas fa-phone"></i>
 										</button></a> <a href="salvarUsuario?acao=editar&id=${user.id }"><button
