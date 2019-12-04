@@ -1,6 +1,6 @@
 # Curso JSP 
 
-Sistema com Login e Cadastro de Usuário e Produtos
+Sistema com Login e Cadastro de Usuários e Produtos
 
 ## Tecnologias
 
@@ -15,6 +15,11 @@ Sistema com Login e Cadastro de Usuário e Produtos
 - HTML5	
 - Bootstrap
 - jQuery
+
+![Login](https://github.com/thomaserick/java_studies/blob/master/curso-Jdev/img/login.png)
+![Home](https://github.com/thomaserick/java_studies/blob/master/curso-Jdev/img/home.png)
+![Usuario](https://github.com/thomaserick/java_studies/blob/master/curso-Jdev/img/cad_usuario.png)
+![Produto](https://github.com/thomaserick/java_studies/blob/master/curso-Jdev/img/cad_produto.png)
 	
  
 
