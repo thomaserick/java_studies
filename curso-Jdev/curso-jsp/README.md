@@ -1,6 +1,6 @@
 # Curso JSP 
 
-Sistema com Login e Cadastro de Usuário e Produtos
+Sistema com Login e Cadastro de Usuários e Produtos
 
 ## Tecnologias
 
