@@ -1,17 +1,19 @@
 package servlet;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
 
@@ -23,6 +25,7 @@ import dao.DaoUsuario;
  */
 
 @WebServlet("/salvarUsuario")
+@MultipartConfig
 public class UsuarioServelet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -74,6 +77,26 @@ public class UsuarioServelet extends HttpServlet {
 					e.printStackTrace();
 				}
 
+			} else if (acao.equalsIgnoreCase("download")) {
+
+				try {
+
+					BeanCursoJsp usuario = daousuario.consultar(id);
+
+					if (usuario != null) {
+						response.setHeader("Content-Disposition",
+								"attachment; filename=arquivo." + usuario.getContentType().split("\\/")[1]);
+
+						byte[] imagemFotoBytes = Base64.decodeBase64(usuario.getFotoBase64());
+						OutputStream os = response.getOutputStream();
+						os.write(imagemFotoBytes);
+
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
 			}
 
 		} catch (Exception e) {
@@ -99,6 +122,7 @@ public class UsuarioServelet extends HttpServlet {
 		String uf = request.getParameter("uf");
 
 		BeanCursoJsp usuario = new BeanCursoJsp();
+
 		usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
 
 		usuario.setLogin(login);
@@ -116,19 +140,34 @@ public class UsuarioServelet extends HttpServlet {
 
 		try {
 
+			/*
+			 * if (ServletFileUpload.isMultipartContent(request)) {
+			 * 
+			 * List<FileItem> fileItems = new ServletFileUpload(new
+			 * DiskFileItemFactory()).parseRequest(request);
+			 * 
+			 * for (FileItem fileItem : fileItems) {
+			 * 
+			 * if (fileItem.getFieldName().equals("imgUser")) {
+			 * 
+			 * String fotoBase64 = new Base64().encodeBase64String(fileItem.get()); String
+			 * contentType = fileItem.getContentType();
+			 * 
+			 * usuario.setFotoBase64(fotoBase64); usuario.setContentType(contentType);
+			 * 
+			 * } }
+			 * 
+			 * }
+			 */
+
 			if (ServletFileUpload.isMultipartContent(request)) {
 
-				List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+				Part imgFoto = request.getPart("imgUser");
 
-				for (FileItem fileItem : fileItems) {
+				String fotoBase64 = new Base64().encodeBase64String(StremParaByte(imgFoto.getInputStream()));
 
-					if (fileItem.getFieldName().equals("imgUser")) {
-
-						String img = new Base64().encodeBase64String(fileItem.get());
-						System.out.println(img);
-
-					}
-				}
+				usuario.setFotoBase64(fotoBase64);
+				usuario.setContentType(imgFoto.getContentType());
 
 			}
 
@@ -176,6 +215,23 @@ public class UsuarioServelet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	/* Converte fluxo de dados para Array de Bytes */
+	private byte[] StremParaByte(InputStream img) throws Exception {
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int reads = img.read();
+
+		while (reads != -1) {
+
+			baos.write(reads);
+			reads = img.read();
+
+		}
+
+		return baos.toByteArray();
 
 	}
 

@@ -21,7 +21,7 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -35,6 +35,8 @@ public class DaoUsuario {
 			stm.setString(8, usuario.getBairro());
 			stm.setString(9, usuario.getCidade());
 			stm.setString(10, usuario.getUf());
+			stm.setString(11, usuario.getFotoBase64());
+			stm.setString(12, usuario.getContentType());
 
 			stm.execute();
 			connection.commit();
@@ -77,6 +79,8 @@ public class DaoUsuario {
 			usuario.setCidade(result.getString("cidade"));
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
+			usuario.setFotoBase64(result.getString("fotobase64"));
+			usuario.setContentType(result.getString("contenttype"));
 
 			listar.add(usuario);
 		}
@@ -127,6 +131,8 @@ public class DaoUsuario {
 			usuario.setCidade(result.getString("cidade"));
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
+			usuario.setFotoBase64(result.getString("fotobase64"));
+			usuario.setContentType(result.getString("contenttype"));
 
 			return usuario;
 

@@ -163,12 +163,10 @@
 								<div class="form-group">
 									<label for="imgUser">Foto:</label>
 									<input type="file" class="form-control-file"
-										id="imgUser">
+										id="imgUser" name="imgUser">
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 
@@ -194,6 +192,7 @@
 						<tr>
 							<th>Código</th>
 							<th>Usuário</th>
+							<th>Foto</th>
 							<th>Fone</th>
 							<th>Login</th>
 							<th>CEP</th>
@@ -212,6 +211,7 @@
 
 								<td style="width: 50px"><c:out value="${user.id }"></c:out></td>
 								<td><c:out value="${user.user }"></c:out></td>
+								<td><a href="salvarUsuario?acao=download&id=${user.id }"><img alt="Imagem usuário" Title="Imagem usuário"src='<c:out value="${user.tempFotouser }"></c:out>' width="32px" height="32px" ></a></td>
 								<td><c:out value="${user.fone }"></c:out></td>
 								<td><c:out value="${user.login }"></c:out></td>
 

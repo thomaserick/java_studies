@@ -15,6 +15,34 @@ public class BeanCursoJsp {
 	private String cidade;
 	private String uf;
 
+	private String fotoBase64;
+	private String contentType;
+	private String tempFotouser;
+
+	/* Monta em tempo de execução */
+	public String getTempFotouser() {
+
+		tempFotouser = "data:" + contentType + ";base64," + fotoBase64;
+
+		return tempFotouser;
+	}
+
+	public String getFotoBase64() {
+		return fotoBase64;
+	}
+
+	public void setFotoBase64(String fotoBase64) {
+		this.fotoBase64 = fotoBase64;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
 	public String getCep() {
 		return cep;
 	}
