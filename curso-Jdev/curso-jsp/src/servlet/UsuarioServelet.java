@@ -1,10 +1,14 @@
 package servlet;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -184,9 +189,35 @@ public class UsuarioServelet extends HttpServlet {
 				Part imgFoto = request.getPart("imgUser");
 
 				if (imgFoto != null && imgFoto.getInputStream().available() > 0) {
-					String fotoBase64 = new Base64().encodeBase64String(StremParaByte(imgFoto.getInputStream()));
+
+					byte[] byteImg = StremParaByte(imgFoto.getInputStream());
+
+					String fotoBase64 = new Base64().encodeBase64String(byteImg);
 					usuario.setFotoBase64(fotoBase64);
 					usuario.setContentType(imgFoto.getContentType());
+
+					/* Miniatura Imagem */
+
+					BufferedImage bfImage = ImageIO.read(new ByteArrayInputStream(byteImg));
+
+					/* Pega o tipo da imagem */
+					int type = bfImage.getType() == 0 ? bfImage.TYPE_INT_ARGB : bfImage.getType();
+
+					/* Cria imagem em miniatura */
+					BufferedImage resizedImage = new BufferedImage(100, 100, type);
+
+					Graphics2D g2d = resizedImage.createGraphics();
+					g2d.drawImage(resizedImage, 0, 0, 100, 100, null);
+
+					/* Escrever a imagem novamente */
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write(resizedImage, "png", baos);
+
+					String miniaturaBase64 = "data:image/png;base64,"
+							+ DatatypeConverter.printBase64Binary(baos.toByteArray());
+
+					/* Miniatura */
+
 				} else {
 					usuario.setFotoBase64(request.getParameter("tempImgUser"));
 					usuario.setContentType(request.getParameter("tempContentType"));
