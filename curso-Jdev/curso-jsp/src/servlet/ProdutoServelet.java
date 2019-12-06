@@ -92,11 +92,6 @@ public class ProdutoServelet extends HttpServlet {
 
 		produto.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
 
-		produto.setDescricao(descricao);
-
-		produto.setQuantidade(!quantidade.isEmpty() ? Double.parseDouble(quantidade) : 0);
-		produto.setValor(!valor.isEmpty() ? Double.parseDouble(valor) : 0);
-
 		try {
 
 			String msg = null;
@@ -118,6 +113,13 @@ public class ProdutoServelet extends HttpServlet {
 			}
 
 			if (checkFields) {
+
+				produto.setDescricao(descricao);
+
+				produto.setQuantidade(!quantidade.isEmpty() ? Double.parseDouble(quantidade) : 0);
+
+				String valorParse = valor.replaceAll("\\.", "");
+				produto.setValor(!valor.isEmpty() ? Double.parseDouble(valorParse.replaceAll("\\,", ".")) : 0);
 
 				if (id == null || id.isEmpty() || produto.getId() == 0) {
 

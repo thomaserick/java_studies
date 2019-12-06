@@ -161,9 +161,23 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="imgUser">Foto:</label>
-									<input type="file" class="form-control-file"
-										id="imgUser" name="imgUser">
+									<label for="imgUser">Foto:</label> <input type="file"
+										class="form-control-file" id="imgUser" name="imgUser">
+
+									<input type="hidden" class="form-control-file" id="tempImgUser"
+										name="tempImgUser" value="${user.fotoBase64}"> <input
+										type="hidden" class="form-control-file" id="tempContentType"
+										name="tempContentType" value="${user.contentType}">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="cvUser">Currículo:</label> <input type="file"
+										class="form-control-file" id="cvUser" name="cvUser"> <input
+										type="hidden" class="form-control-file" id="tempCv"
+										name="tempCv" value="${user.cvBase64}"> <input
+										type="hidden" class="form-control-file" id="tempContentTypeCv"
+										name="tempContentTypeCv" value="${user.contentTypeCv}">
 								</div>
 							</div>
 						</div>
@@ -193,7 +207,7 @@
 							<th>Código</th>
 							<th>Usuário</th>
 							<th>Foto</th>
-							<th>Fone</th>
+							<th>Currículo</th>
 							<th>Login</th>
 							<th>CEP</th>
 							<th>Endereço</th>
@@ -211,8 +225,31 @@
 
 								<td style="width: 50px"><c:out value="${user.id }"></c:out></td>
 								<td><c:out value="${user.user }"></c:out></td>
-								<td><a href="salvarUsuario?acao=download&id=${user.id }"><img alt="Imagem usuário" Title="Imagem usuário"src='<c:out value="${user.tempFotouser }"></c:out>' width="32px" height="32px" ></a></td>
-								<td><c:out value="${user.fone }"></c:out></td>
+								<td>
+								
+								
+								<c:if test="${not empty user.fotoBase64 }">								
+									<a href="salvarUsuario?acao=download&id=${user.id }"><img
+										alt="Imagem usuário" Title="Imagem usuário"
+										src='<c:out value="${user.tempFotouser }"></c:out>'
+										width="32px" height="32px"></a>
+								</c:if>
+								<c:if test="${empty user.fotoBase64 }">	
+										<i class="fas fa-user-secret fa-3x"></i>
+								</c:if>	
+								
+								
+								</td>
+
+								<td class="text-center"><c:if
+										test="${not empty user.cvBase64}">
+										<a href="salvarUsuario?acao=downloadCv&id=${user.id }"
+											Title="Currículo"> <i class="far fa-file-pdf fa-3x"></i>
+										</a>
+									</c:if>
+								</td>
+
+
 								<td><c:out value="${user.login }"></c:out></td>
 
 								<td><c:out value="${user.cep }"></c:out></td>
@@ -245,7 +282,7 @@
 
 
 <script type="text/javascript">
-	jQuery("input.fone").mask("(99) 9999-9999?9").focusout(
+	jQuery("input.fone").mask("(99) 99999-999?9").focusout(
 			function(event) {
 				var target, phone, element;
 				target = (event.currentTarget) ? event.currentTarget

@@ -21,7 +21,7 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,contenttypecv) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -37,6 +37,8 @@ public class DaoUsuario {
 			stm.setString(10, usuario.getUf());
 			stm.setString(11, usuario.getFotoBase64());
 			stm.setString(12, usuario.getContentType());
+			stm.setString(13, usuario.getCvBase64());
+			stm.setString(14, usuario.getContentTypeCv());
 
 			stm.execute();
 			connection.commit();
@@ -79,8 +81,14 @@ public class DaoUsuario {
 			usuario.setCidade(result.getString("cidade"));
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
+
+			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
 			usuario.setContentType(result.getString("contenttype"));
+
+			/* Currículo usuário */
+			usuario.setCvBase64(result.getString("cvbase64"));
+			usuario.setContentTypeCv(result.getString("contenttypecv"));
 
 			listar.add(usuario);
 		}
@@ -131,8 +139,14 @@ public class DaoUsuario {
 			usuario.setCidade(result.getString("cidade"));
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
+
+			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
 			usuario.setContentType(result.getString("contenttype"));
+
+			/* Currículo usuário */
+			usuario.setCvBase64(result.getString("cvbase64"));
+			usuario.setContentTypeCv(result.getString("contenttypecv"));
 
 			return usuario;
 
@@ -144,7 +158,8 @@ public class DaoUsuario {
 	public void atualizarUser(BeanCursoJsp usuario) {
 
 		try {
-			String sql = "update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?, cidade = ?, uf = ? where id="
+			String sql = "update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?,"
+					+ "cidade = ?, uf = ?, fotobase64 = ?, contenttype = ?, cvbase64 = ?, contenttypecv = ? where id ="
 					+ usuario.getId();
 			PreparedStatement stm = connection.prepareStatement(sql);
 
@@ -158,6 +173,10 @@ public class DaoUsuario {
 			stm.setString(8, usuario.getBairro());
 			stm.setString(9, usuario.getCidade());
 			stm.setString(10, usuario.getUf());
+			stm.setString(11, usuario.getFotoBase64());
+			stm.setString(12, usuario.getContentType());
+			stm.setString(13, usuario.getCvBase64());
+			stm.setString(14, usuario.getContentTypeCv());
 
 			stm.executeUpdate();
 			connection.commit();

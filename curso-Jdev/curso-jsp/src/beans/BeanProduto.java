@@ -39,4 +39,8 @@ public class BeanProduto {
 		this.valor = valor;
 	}
 
+	public String getParseValor() {
+		return Double.toString(valor).replace('.', ',');
+	}
+
 }

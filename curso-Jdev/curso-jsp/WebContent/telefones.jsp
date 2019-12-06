@@ -150,7 +150,7 @@
 
 
 <script type="text/javascript">
-	jQuery("input.fone").mask("(99) 9999-9999?9").focusout(
+	jQuery("input.fone").mask("(99) 99999-999?9").focusout(
 			function(event) {
 				var target, phone, element;
 				target = (event.currentTarget) ? event.currentTarget

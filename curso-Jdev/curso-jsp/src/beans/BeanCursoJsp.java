@@ -19,6 +19,33 @@ public class BeanCursoJsp {
 	private String contentType;
 	private String tempFotouser;
 
+	private String cvBase64;
+	private String contentTypeCv;
+	private String tempCvUser;
+
+	public String getContentTypeCv() {
+		return contentTypeCv;
+	}
+
+	public void setContentTypeCv(String contentTypeCv) {
+		this.contentTypeCv = contentTypeCv;
+	}
+
+	public void setCvBase64(String cvBase64) {
+		this.cvBase64 = cvBase64;
+	}
+
+	public String getCvBase64() {
+		return cvBase64;
+	}
+
+	public String getTempCvUser() {
+
+		tempCvUser = "data:" + contentTypeCv + ";base64," + cvBase64;
+
+		return tempCvUser;
+	}
+
 	/* Monta em tempo de execução */
 	public String getTempFotouser() {
 

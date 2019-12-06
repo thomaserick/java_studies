@@ -2,6 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"
+          prefix="fmt" %>
+          
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +14,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
@@ -23,8 +29,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
+
 <script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+	src="resources/js/jquery.maskMoney.min.js"></script>
 
 <title>Cadastro de Produto</title>
 
@@ -56,9 +63,9 @@
 				<div class="row">
 					<div class="col-md-9">
 						<c:if test="${not empty msg}">
-							<p>
+							
 							<div class="alert alert-danger" role="alert">${msg}</div>
-							</p>
+						
 						</c:if>
 						<div class="form-group">
 							<label for="id">Código</label> <input type="text"
@@ -68,7 +75,7 @@
 
 						<div class="form-group">
 							<label for="login">Descrição</label> <input type="text"
-								class="form-control col-md-4" id="descricao"
+								class="form-control col-md-4" id="descricao" maxlength="150"
 								placeholder="Descrição" name="descricao" ${edit}
 								value="${prod.descricao}">
 						</div>
@@ -81,10 +88,10 @@
 						</div>
 
 						<div class="form-group">
-							<label for="fone">Valor:</label> <input min="0" step=".10"
-								type="number" class="form-control col-md-4 " id="valor"
+							<label for="fone">Valor:</label> <input  step=".10" 
+								type="text" class="form-control col-md-4" id="valor" data-thousands="." data-decimal=","
 								onchange="calcular()" placeholder="0.00" name="valor"
-								value="${prod.valor}">
+								value="${prod.parseValor}">
 						</div>
 
 						<div class="form-group">
@@ -130,9 +137,9 @@
 
 								<td style="width: 150px"><c:out value="${prod.id}"></c:out></td>
 								<td><c:out value="${prod.descricao }"></c:out></td>
-								<td class=""><c:out value="${prod.quantidade}"></c:out></td>
-								<td class=""><c:out value="${prod.valor}"></c:out></td>
-
+								<fmt:setLocale value="pt-BR" />		
+								<td class=""><fmt:formatNumber type="currency" maxFractionDigits="2" currencySymbol="" value="${prod.quantidade}" />	</td> 		
+							 	<td class=""><fmt:formatNumber type="currency" maxFractionDigits="2" currencySymbol="R$" value="${prod.valor}" />	</td>
 								<td><a href="salvarProduto?acao=delete&id=${prod.id}"><button
 											class="btn btn-danger" title="Excluir">
 											<i class="far fa-trash-alt"></i>
@@ -158,7 +165,7 @@
 		var qtde = parseFloat(document.getElementById('quantidade').value);
 		var valor = parseFloat(document.getElementById('valor').value);
 
-		var total = qtde + valor
+		var total = qtde * valor
 
 		document.getElementById('total').value = total.toFixed(2);
 
@@ -177,15 +184,22 @@
 			return false;
 		}
 
-		return true;
-
+		return true;	
+		
 	}
+	
+	$(function() {
+	    $('#valor').maskMoney();
+	  })
+	
+	$(document).ready(function(){
+		$('.qtde').mask("#.##0.00", {
+			reverse : true
+		});
+	    
+	}); 
+	
 
-	$('.qtde').mask("#.##0.00", {
-		reverse : true
-	});
-
-	$(".money").mask("R$###.###.###,##");
 </script>
 
 

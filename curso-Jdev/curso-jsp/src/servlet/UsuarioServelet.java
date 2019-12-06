@@ -84,8 +84,8 @@ public class UsuarioServelet extends HttpServlet {
 					BeanCursoJsp usuario = daousuario.consultar(id);
 
 					if (usuario != null) {
-						response.setHeader("Content-Disposition",
-								"attachment; filename=arquivo." + usuario.getContentType().split("\\/")[1]);
+						response.setHeader("Content-Disposition", "attachment; filename=arquivo."
+								+ usuario.getContentType().split("\\/")[1]); /* Spli -> */
 
 						byte[] imagemFotoBytes = Base64.decodeBase64(usuario.getFotoBase64());
 						OutputStream os = response.getOutputStream();
@@ -97,6 +97,25 @@ public class UsuarioServelet extends HttpServlet {
 					e.printStackTrace();
 				}
 
+			} else if (acao.equalsIgnoreCase("downloadCv")) {
+
+				try {
+
+					BeanCursoJsp usuario = daousuario.consultar(id);
+
+					if (usuario != null) {
+						response.setHeader("Content-Disposition", "attachment; filename=arquivo."
+								+ usuario.getContentTypeCv().split("\\/")[1]); /* Split -> */
+
+						byte[] imagemCvBytes = Base64.decodeBase64(usuario.getCvBase64());
+						OutputStream os = response.getOutputStream();
+						os.write(imagemCvBytes);
+
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 
 		} catch (Exception e) {
@@ -164,10 +183,26 @@ public class UsuarioServelet extends HttpServlet {
 
 				Part imgFoto = request.getPart("imgUser");
 
-				String fotoBase64 = new Base64().encodeBase64String(StremParaByte(imgFoto.getInputStream()));
+				if (imgFoto != null && imgFoto.getInputStream().available() > 0) {
+					String fotoBase64 = new Base64().encodeBase64String(StremParaByte(imgFoto.getInputStream()));
+					usuario.setFotoBase64(fotoBase64);
+					usuario.setContentType(imgFoto.getContentType());
+				} else {
+					usuario.setFotoBase64(request.getParameter("tempImgUser"));
+					usuario.setContentType(request.getParameter("tempContentType"));
 
-				usuario.setFotoBase64(fotoBase64);
-				usuario.setContentType(imgFoto.getContentType());
+				}
+
+				Part cv = request.getPart("cvUser");
+				if (cv != null && cv.getInputStream().available() > 0) {
+					String cvBase64 = new Base64().encodeBase64String(StremParaByte(cv.getInputStream()));
+					usuario.setCvBase64(cvBase64);
+					usuario.setContentTypeCv(cv.getContentType());
+				} else {
+					usuario.setCvBase64(request.getParameter("tempCv"));
+					usuario.setContentTypeCv(request.getParameter("tempContentTypeCv"));
+
+				}
 
 			}
 
