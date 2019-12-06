@@ -164,20 +164,13 @@
 									<label for="imgUser">Foto:</label> <input type="file"
 										class="form-control-file" id="imgUser" name="imgUser">
 
-									<input type="hidden" class="form-control-file" id="tempImgUser"
-										name="tempImgUser" value="${user.fotoBase64}"> <input
-										type="hidden" class="form-control-file" id="tempContentType"
-										name="tempContentType" value="${user.contentType}">
+								
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="cvUser">Currículo:</label> <input type="file"
-										class="form-control-file" id="cvUser" name="cvUser"> <input
-										type="hidden" class="form-control-file" id="tempCv"
-										name="tempCv" value="${user.cvBase64}"> <input
-										type="hidden" class="form-control-file" id="tempContentTypeCv"
-										name="tempContentTypeCv" value="${user.contentTypeCv}">
+										class="form-control-file" id="cvUser" name="cvUser">
 								</div>
 							</div>
 						</div>
@@ -228,13 +221,13 @@
 								<td>
 								
 								
-								<c:if test="${not empty user.fotoBase64 }">								
+								<c:if test="${not empty user.fotoBase64Min }">								
 									<a href="salvarUsuario?acao=download&id=${user.id }"><img
 										alt="Imagem usuário" Title="Imagem usuário"
-										src='<c:out value="${user.tempFotouser }"></c:out>'
+										src='<c:out value="${user.fotoBase64Min }"></c:out>'
 										width="32px" height="32px"></a>
 								</c:if>
-								<c:if test="${empty user.fotoBase64 }">	
+								<c:if test="${empty user.fotoBase64Min }">	
 										<i class="fas fa-user-secret fa-3x"></i>
 								</c:if>	
 								

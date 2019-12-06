@@ -23,6 +23,35 @@ public class BeanCursoJsp {
 	private String contentTypeCv;
 	private String tempCvUser;
 
+	private String fotoBase64Min;
+
+	private boolean atualizarImg = true;
+	private boolean atualizarCv = true;
+
+	public boolean isAtualizarImg() {
+		return atualizarImg;
+	}
+
+	public void setAtualizarImg(boolean atualizarImg) {
+		this.atualizarImg = atualizarImg;
+	}
+
+	public boolean isAtualizarCv() {
+		return atualizarCv;
+	}
+
+	public void setAtualizarCv(boolean atualizarCv) {
+		this.atualizarCv = atualizarCv;
+	}
+
+	public String getFotoBase64Min() {
+		return fotoBase64Min;
+	}
+
+	public void setFotoBase64Min(String fotoBase64Min) {
+		this.fotoBase64Min = fotoBase64Min;
+	}
+
 	public String getContentTypeCv() {
 		return contentTypeCv;
 	}

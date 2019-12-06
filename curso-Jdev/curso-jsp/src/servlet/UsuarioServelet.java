@@ -198,6 +198,8 @@ public class UsuarioServelet extends HttpServlet {
 
 					/* Miniatura Imagem */
 
+					byte[] imgByteDecode = new Base64().decodeBase64(fotoBase64);
+
 					BufferedImage bfImage = ImageIO.read(new ByteArrayInputStream(byteImg));
 
 					/* Pega o tipo da imagem */
@@ -207,21 +209,22 @@ public class UsuarioServelet extends HttpServlet {
 					BufferedImage resizedImage = new BufferedImage(100, 100, type);
 
 					Graphics2D g2d = resizedImage.createGraphics();
-					g2d.drawImage(resizedImage, 0, 0, 100, 100, null);
+					g2d.drawImage(bfImage, 0, 0, 100, 100, null);
+					g2d.dispose(); // Finaliza o processo
 
 					/* Escrever a imagem novamente */
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					ImageIO.write(resizedImage, "png", baos);
 
-					String miniaturaBase64 = "data:image/png;base64,"
+					String fotoBase64Min = "data:image/png;base64,"
 							+ DatatypeConverter.printBase64Binary(baos.toByteArray());
+
+					usuario.setFotoBase64Min(fotoBase64Min);
 
 					/* Miniatura */
 
 				} else {
-					usuario.setFotoBase64(request.getParameter("tempImgUser"));
-					usuario.setContentType(request.getParameter("tempContentType"));
-
+					usuario.setAtualizarImg(false);
 				}
 
 				Part cv = request.getPart("cvUser");
@@ -230,8 +233,7 @@ public class UsuarioServelet extends HttpServlet {
 					usuario.setCvBase64(cvBase64);
 					usuario.setContentTypeCv(cv.getContentType());
 				} else {
-					usuario.setCvBase64(request.getParameter("tempCv"));
-					usuario.setContentTypeCv(request.getParameter("tempContentTypeCv"));
+					usuario.setAtualizarCv(false);
 
 				}
 

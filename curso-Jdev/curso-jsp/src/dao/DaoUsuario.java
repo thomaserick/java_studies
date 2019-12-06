@@ -21,7 +21,7 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,contenttypecv) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,contenttypecv,fotobase64min) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -39,6 +39,7 @@ public class DaoUsuario {
 			stm.setString(12, usuario.getContentType());
 			stm.setString(13, usuario.getCvBase64());
 			stm.setString(14, usuario.getContentTypeCv());
+			stm.setString(15, usuario.getFotoBase64Min());
 
 			stm.execute();
 			connection.commit();
@@ -61,7 +62,7 @@ public class DaoUsuario {
 		/* Lista de Objetos */
 		List<BeanCursoJsp> listar = new ArrayList<BeanCursoJsp>();
 
-		String sql = "select * from usuario";
+		String sql = "select * from usuario where id <> 1 or login <> 'admin'";
 
 		PreparedStatement stm = connection.prepareStatement(sql);
 		ResultSet result = stm.executeQuery();
@@ -85,6 +86,7 @@ public class DaoUsuario {
 			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
 			usuario.setContentType(result.getString("contenttype"));
+			usuario.setFotoBase64Min(result.getString("fotobase64Min"));
 
 			/* Currículo usuário */
 			usuario.setCvBase64(result.getString("cvbase64"));
@@ -101,7 +103,7 @@ public class DaoUsuario {
 
 		try {
 
-			String sql = "delete from usuario where id=" + id;
+			String sql = "delete from usuario where id <> 1 and login <> 'login and 'id=" + id;
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.execute();
 
@@ -143,6 +145,7 @@ public class DaoUsuario {
 			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
 			usuario.setContentType(result.getString("contenttype"));
+			usuario.setFotoBase64Min(result.getString("fotobase64min"));
 
 			/* Currículo usuário */
 			usuario.setCvBase64(result.getString("cvbase64"));
@@ -158,25 +161,47 @@ public class DaoUsuario {
 	public void atualizarUser(BeanCursoJsp usuario) {
 
 		try {
-			String sql = "update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?,"
-					+ "cidade = ?, uf = ?, fotobase64 = ?, contenttype = ?, cvbase64 = ?, contenttypecv = ? where id ="
-					+ usuario.getId();
-			PreparedStatement stm = connection.prepareStatement(sql);
 
-			stm.setString(1, usuario.getLogin());
-			stm.setString(2, usuario.getPasswd());
-			stm.setString(3, usuario.getUser());
-			stm.setString(4, usuario.getFone());
-			stm.setString(5, usuario.getCep());
-			stm.setString(6, usuario.getEndereco());
-			stm.setString(7, usuario.getEndNum());
-			stm.setString(8, usuario.getBairro());
-			stm.setString(9, usuario.getCidade());
-			stm.setString(10, usuario.getUf());
-			stm.setString(11, usuario.getFotoBase64());
-			stm.setString(12, usuario.getContentType());
-			stm.setString(13, usuario.getCvBase64());
-			stm.setString(14, usuario.getContentTypeCv());
+			int index = 1;
+
+			StringBuilder sql = new StringBuilder();
+
+			sql.append(
+					"update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?,");
+			sql.append("cidade = ?, uf = ? ");
+
+			if (usuario.isAtualizarImg()) {
+				sql.append(", fotobase64 = ?, contenttype = ?, fotobase64min = ?");
+			}
+
+			if (usuario.isAtualizarCv()) {
+				sql.append(", cvbase64 = ?, contenttypecv = ? ");
+			}
+			sql.append(" where id =" + usuario.getId());
+
+			PreparedStatement stm = connection.prepareStatement(sql.toString());
+
+			stm.setString(index++, usuario.getLogin());
+			stm.setString(index++, usuario.getPasswd());
+			stm.setString(index++, usuario.getUser());
+			stm.setString(index++, usuario.getFone());
+			stm.setString(index++, usuario.getCep());
+			stm.setString(index++, usuario.getEndereco());
+			stm.setString(index++, usuario.getEndNum());
+			stm.setString(index++, usuario.getBairro());
+			stm.setString(index++, usuario.getCidade());
+			stm.setString(index++, usuario.getUf());
+
+			if (usuario.isAtualizarImg()) {
+				stm.setString(index++, usuario.getFotoBase64());
+				stm.setString(index++, usuario.getContentType());
+				stm.setString(index++, usuario.getFotoBase64Min());
+			}
+
+			if (usuario.isAtualizarCv()) {
+				stm.setString(index++, usuario.getCvBase64());
+				stm.setString(index++, usuario.getContentTypeCv());
+			}
 
 			stm.executeUpdate();
 			connection.commit();
