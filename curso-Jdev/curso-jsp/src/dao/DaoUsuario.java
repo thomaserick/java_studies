@@ -103,7 +103,7 @@ public class DaoUsuario {
 
 		try {
 
-			String sql = "delete from usuario where id <> 1 and login <> 'login and 'id=" + id;
+			String sql = "delete from usuario where id <> 1 and login <> 'login' and id=" + id;
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.execute();
 

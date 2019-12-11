@@ -1,5 +1,7 @@
 package dao;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +29,7 @@ public class DaoProduto {
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, produto.getDescricao());
-			stm.setDouble(2, produto.getQuantidade());
+			stm.setDouble(2, BigDecimal.valueOf(produto.getQuantidade()).setScale(4, RoundingMode.DOWN).doubleValue());
 			stm.setDouble(3, produto.getValor());
 			stm.execute();
 

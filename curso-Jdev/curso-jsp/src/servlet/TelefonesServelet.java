@@ -35,19 +35,28 @@ public class TelefonesServelet extends HttpServlet {
 
 		try {
 
-			if (acao.endsWith("delete")) {
-				Long id = Long.parseLong(request.getParameter("id") != null ? request.getParameter("id") : "0");
+			if (userId != 0) {
 
-				daotelefones.delete(id);
+				if (acao.endsWith("delete")) {
+					Long id = Long.parseLong(request.getParameter("id") != null ? request.getParameter("id") : "0");
+
+					daotelefones.delete(id);
+				}
+
+				BeanCursoJsp usuario = daousuario.consultar(userId);
+				request.getSession().setAttribute("userId", userId);
+
+				RequestDispatcher view = request.getRequestDispatcher("/telefones.jsp");
+				request.setAttribute("telefones", daotelefones.listar(userId));
+				request.setAttribute("userName", usuario.getUser());
+				view.forward(request, response);
+			} else {
+
+				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
+				request.setAttribute("usuarios", daousuario.listar());
+				view.forward(request, response);
+
 			}
-
-			BeanCursoJsp usuario = daousuario.consultar(userId);
-			request.getSession().setAttribute("userId", userId);
-
-			RequestDispatcher view = request.getRequestDispatcher("/telefones.jsp");
-			request.setAttribute("telefones", daotelefones.listar(userId));
-			request.setAttribute("userName", usuario.getUser());
-			view.forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();
