@@ -162,6 +162,12 @@ public class UsuarioServelet extends HttpServlet {
 		usuario.setBairro(bairro);
 		usuario.setUf(uf);
 
+		if (request.getParameter("ativo") != null && request.getParameter("ativo").equalsIgnoreCase("on")) {
+			usuario.setAtivo(true);
+		} else {
+			usuario.setAtivo(false);
+		}
+
 		try {
 
 			/*
@@ -253,10 +259,6 @@ public class UsuarioServelet extends HttpServlet {
 			}
 			if (user == null || user.isEmpty()) {
 				msg = "Usuário deve ser Informado!";
-				checkField = false;
-			}
-			if (fone == null || fone.isEmpty()) {
-				msg = "Telefone deve ser Informado!";
 				checkField = false;
 			}
 

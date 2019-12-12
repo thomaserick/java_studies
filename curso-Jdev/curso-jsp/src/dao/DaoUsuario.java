@@ -21,7 +21,7 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,contenttypecv,fotobase64min) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,contenttypecv,fotobase64min,ativo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -40,6 +40,7 @@ public class DaoUsuario {
 			stm.setString(13, usuario.getCvBase64());
 			stm.setString(14, usuario.getContentTypeCv());
 			stm.setString(15, usuario.getFotoBase64Min());
+			stm.setBoolean(16, usuario.isAtivo());
 
 			stm.execute();
 			connection.commit();
@@ -82,6 +83,7 @@ public class DaoUsuario {
 			usuario.setCidade(result.getString("cidade"));
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
+			usuario.setAtivo(result.getBoolean("ativo"));
 
 			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
@@ -141,6 +143,7 @@ public class DaoUsuario {
 			usuario.setCidade(result.getString("cidade"));
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
+			usuario.setAtivo(result.getBoolean("ativo"));
 
 			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
@@ -168,7 +171,7 @@ public class DaoUsuario {
 
 			sql.append(
 					"update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?,");
-			sql.append("cidade = ?, uf = ? ");
+			sql.append("cidade = ?, uf = ? , ativo = ? ");
 
 			if (usuario.isAtualizarImg()) {
 				sql.append(", fotobase64 = ?, contenttype = ?, fotobase64min = ?");
@@ -191,6 +194,7 @@ public class DaoUsuario {
 			stm.setString(index++, usuario.getBairro());
 			stm.setString(index++, usuario.getCidade());
 			stm.setString(index++, usuario.getUf());
+			stm.setBoolean(index++, usuario.isAtivo());
 
 			if (usuario.isAtualizarImg()) {
 				stm.setString(index++, usuario.getFotoBase64());

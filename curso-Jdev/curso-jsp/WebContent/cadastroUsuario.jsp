@@ -97,12 +97,14 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="fone">Fone:</label> <input type="tel"
-										class="fone form-control col-md-6" id="fone"
-										placeholder="Fone" name="fone" value="${user.fone}"
-										pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" name="ativo" id="ativo" ${user.ativo ? 'checked': ''} />
+									    <label class="form-check-label"> Ativo </label>
+									</div>
 								</div>
 							</div>
+
+							
 						</div>
 
 						<div class="row">
@@ -164,7 +166,7 @@
 									<label for="imgUser">Foto:</label> <input type="file"
 										class="form-control-file" id="imgUser" name="imgUser">
 
-								
+
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -218,29 +220,21 @@
 
 								<td style="width: 50px"><c:out value="${user.id }"></c:out></td>
 								<td><c:out value="${user.user }"></c:out></td>
-								<td>
-								
-								
-								<c:if test="${not empty user.fotoBase64Min }">								
-									<a href="salvarUsuario?acao=download&id=${user.id }"><img
-										alt="Imagem usuário" Title="Imagem usuário"
-										src='<c:out value="${user.fotoBase64Min }"></c:out>'
-										width="32px" height="32px"></a>
-								</c:if>
-								<c:if test="${empty user.fotoBase64Min }">	
+								<td><c:if test="${not empty user.fotoBase64Min }">
+										<a href="salvarUsuario?acao=download&id=${user.id }"><img
+											alt="Imagem usuário" Title="Imagem usuário"
+											src='<c:out value="${user.fotoBase64Min }"></c:out>'
+											width="32px" height="32px"></a>
+									</c:if> <c:if test="${empty user.fotoBase64Min }">
 										<i class="fas fa-user-secret fa-3x"></i>
-								</c:if>	
-								
-								
-								</td>
+									</c:if></td>
 
 								<td class="text-center"><c:if
 										test="${not empty user.cvBase64}">
 										<a href="salvarUsuario?acao=downloadCv&id=${user.id }"
 											Title="Currículo"> <i class="far fa-file-pdf fa-3x"></i>
 										</a>
-									</c:if>
-								</td>
+									</c:if></td>
 
 
 								<td><c:out value="${user.login }"></c:out></td>
@@ -258,7 +252,8 @@
 										</button></a> <a href="salvarUsuario?acao=editar&id=${user.id }"><button
 											class="btn btn-primary" title="Editar">
 											<i class="fas fa-user-edit"></i>
-										</button></a> <a href="salvarUsuario?acao=delete&id=${user.id}" data-confirm='Tem certeza de que deseja excluir o usuário selecionado?'><button
+										</button></a> <a href="salvarUsuario?acao=delete&id=${user.id}"
+									data-confirm='Tem certeza de que deseja excluir o usuário selecionado?'><button
 											class="btn btn-danger" title="Excluir">
 											<i class="far fa-trash-alt"></i>
 										</button></a></td>
@@ -300,10 +295,7 @@
 		} else if (document.getElementById("user").value == '') {
 			alert('Informe o Usuário');
 			return false;
-		} else if (document.getElementById("fone").value == '') {
-			alert('Informe o Telefone');
-			return false;
-		}
+		} 
 		return true;
 	}
 
@@ -372,20 +364,26 @@
 							}
 						});
 			});
-	
-	
-	$(document).ready(function() {
-		  $("a[data-confirm]").click(function(ev) {
-		    var href = $(this).attr("href");
-		    if (!$("#confirm-delete").length) {
-		      $("body").append(
-		        '<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header bg-danger text-white">EXCLUIR USUÁRIO <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">Tem certeza de que deseja excluir o usuário selecionado?</div><div class="modal-footer"><button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button><a class="btn btn-danger text-white" id="dataComfirmOK">Apagar</a></div></div></div></div>'
-		      );
-		    }
-		    $("#dataComfirmOK").attr("href", href);
-		    $("#confirm-delete").modal({ show: true });
-		    return false;
-		  });
-		});
+
+	$(document)
+			.ready(
+					function() {
+						$("a[data-confirm]")
+								.click(
+										function(ev) {
+											var href = $(this).attr("href");
+											if (!$("#confirm-delete").length) {
+												$("body")
+														.append(
+																'<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header bg-danger text-white">EXCLUIR USUÁRIO <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body">Tem certeza de que deseja excluir o usuário selecionado?</div><div class="modal-footer"><button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button><a class="btn btn-danger text-white" id="dataComfirmOK">Apagar</a></div></div></div></div>');
+											}
+											$("#dataComfirmOK").attr("href",
+													href);
+											$("#confirm-delete").modal({
+												show : true
+											});
+											return false;
+										});
+					});
 </script>
 </html>

@@ -25,8 +25,18 @@ public class BeanCursoJsp {
 
 	private String fotoBase64Min;
 
+	private boolean ativo;
+
 	private boolean atualizarImg = true;
 	private boolean atualizarCv = true;
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 
 	public boolean isAtualizarImg() {
 		return atualizarImg;
