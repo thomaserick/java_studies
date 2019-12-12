@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.BeanCategoria;
 import beans.BeanProduto;
 import connection.SingleConnection;
 
@@ -24,13 +25,14 @@ public class DaoProduto {
 
 	public void salvarProduto(BeanProduto produto) {
 
-		String sql = "insert into produto (descricao, quantidade, valor) values (?, ?, ?)";
+		String sql = "insert into produto (descricao, quantidade, valor, categoria_id) values (?, ?, ?,?)";
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, produto.getDescricao());
 			stm.setDouble(2, BigDecimal.valueOf(produto.getQuantidade()).setScale(4, RoundingMode.DOWN).doubleValue());
 			stm.setDouble(3, produto.getValor());
+			stm.setLong(4, produto.getCategoria_id());
 			stm.execute();
 
 			connection.commit();
@@ -66,6 +68,7 @@ public class DaoProduto {
 			produto.setDescricao(result.getString("descricao"));
 			produto.setQuantidade(result.getDouble("quantidade"));
 			produto.setValor(result.getDouble("valor"));
+			produto.setCategoria_id(result.getLong("categoria_id"));
 
 			listar.add(produto);
 		}
@@ -99,6 +102,7 @@ public class DaoProduto {
 			produto.setDescricao(result.getString("descricao"));
 			produto.setQuantidade(result.getDouble("quantidade"));
 			produto.setValor(result.getDouble("valor"));
+			produto.setCategoria_id(result.getLong("categoria_id"));
 
 			return produto;
 		}
@@ -131,7 +135,8 @@ public class DaoProduto {
 
 	public void atualizarProduto(BeanProduto produto) {
 
-		String sql = "update produto set descricao = ?, quantidade = ?, valor = ? where id= " + produto.getId();
+		String sql = "update produto set descricao = ?, quantidade = ?, valor = ?, categoria_id = ? where id= "
+				+ produto.getId();
 		try {
 
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -139,6 +144,7 @@ public class DaoProduto {
 			stm.setString(1, produto.getDescricao());
 			stm.setDouble(2, produto.getQuantidade());
 			stm.setDouble(3, produto.getValor());
+			stm.setLong(4, produto.getCategoria_id());
 
 			stm.executeUpdate();
 			connection.commit();
@@ -151,6 +157,28 @@ public class DaoProduto {
 			}
 			e.printStackTrace();
 		}
+
+	}
+
+	public List<BeanCategoria> listarCategoria() throws SQLException {
+
+		List<BeanCategoria> listar = new ArrayList<BeanCategoria>();
+		String sql = "select * from categoria";
+		PreparedStatement stm = connection.prepareStatement(sql);
+		ResultSet result = stm.executeQuery();
+
+		while (result.next()) {
+
+			BeanCategoria categoria = new BeanCategoria();
+
+			categoria.setId(result.getLong("id"));
+			categoria.setDescricao(result.getString("descricao"));
+
+			listar.add(categoria);
+
+		}
+
+		return listar;
 
 	}
 

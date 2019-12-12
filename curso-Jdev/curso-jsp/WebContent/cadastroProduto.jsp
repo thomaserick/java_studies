@@ -79,10 +79,29 @@
 								placeholder="Descrição" name="descricao" ${edit}
 								value="${prod.descricao}">
 						</div>
-
+						<div class ="form-group">
+							<label for="login">Categoria</label>
+							<select id="categoria_id" name="categoria_id" class="form-control col-md-6">
+							<option value="">Selecione</option> 						
+							<c:forEach items="${categorias}" var="cat">		
+													
+								<option value="${cat.id}" id="${cat.id}"								
+							
+								<c:if test="${cat.id == prod.categoria_id}">
+										<c:out value="selected=selected"/>	
+								</c:if>>
+								
+								${cat.descricao}
+								</option>				
+							
+													
+							<%-- <option value="${cat.id}" id="${cat.id}" ${prod.categoria_id == cat_id ? 'selected': ''}>${cat.descricao}</option>		 --%>					
+							</c:forEach>
+							</select>
+						</div>
 						<div class="form-group">
 							<label for="quantidade">Quantidade:</label> <input type="number"
-								class="form-control col-md-4 " id="quantidade"
+								class="form-control col-md-4" id="quantidade"
 								onchange="calcular()" placeholder="0.00" name="quantidade"
 								value="${prod.quantidade}" step="0.01">
 						</div>
