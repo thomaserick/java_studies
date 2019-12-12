@@ -21,9 +21,11 @@ public class DaoUsuario {
 	}
 
 	public void salvarUsuario(BeanCursoJsp usuario) {
-		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,contenttypecv,fotobase64min,ativo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+		String sql = "insert into usuario (login, passwd, username, fone, cep, endereco, endnum, bairro, cidade, uf, fotobase64, contenttype, cvbase64,"
+				+ "contenttypecv,fotobase64min, ativo, sexo, perfil ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
+
 			PreparedStatement stm = connection.prepareStatement(sql);
 			stm.setString(1, usuario.getLogin());
 			stm.setString(2, usuario.getPasswd());
@@ -41,6 +43,8 @@ public class DaoUsuario {
 			stm.setString(14, usuario.getContentTypeCv());
 			stm.setString(15, usuario.getFotoBase64Min());
 			stm.setBoolean(16, usuario.isAtivo());
+			stm.setString(17, usuario.getSexo());
+			stm.setString(18, usuario.getPerfil());
 
 			stm.execute();
 			connection.commit();
@@ -84,6 +88,8 @@ public class DaoUsuario {
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
 			usuario.setAtivo(result.getBoolean("ativo"));
+			usuario.setSexo(result.getString("sexo"));
+			usuario.setPerfil(result.getString("perfil"));
 
 			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
@@ -144,6 +150,8 @@ public class DaoUsuario {
 			usuario.setBairro(result.getString("bairro"));
 			usuario.setUf(result.getString("uf"));
 			usuario.setAtivo(result.getBoolean("ativo"));
+			usuario.setSexo(result.getString("sexo"));
+			usuario.setPerfil(result.getString("perfil"));
 
 			/* Imagem usuario */
 			usuario.setFotoBase64(result.getString("fotobase64"));
@@ -171,7 +179,7 @@ public class DaoUsuario {
 
 			sql.append(
 					"update usuario set login = ?, passwd = ?, username = ? , fone = ?, cep = ?, endereco = ?, endnum = ?, bairro = ?,");
-			sql.append("cidade = ?, uf = ? , ativo = ? ");
+			sql.append("cidade = ?, uf = ? , ativo = ?, sexo = ?, perfil = ? ");
 
 			if (usuario.isAtualizarImg()) {
 				sql.append(", fotobase64 = ?, contenttype = ?, fotobase64min = ?");
@@ -195,6 +203,8 @@ public class DaoUsuario {
 			stm.setString(index++, usuario.getCidade());
 			stm.setString(index++, usuario.getUf());
 			stm.setBoolean(index++, usuario.isAtivo());
+			stm.setString(index++, usuario.getSexo());
+			stm.setString(index++, usuario.getPerfil());
 
 			if (usuario.isAtualizarImg()) {
 				stm.setString(index++, usuario.getFotoBase64());

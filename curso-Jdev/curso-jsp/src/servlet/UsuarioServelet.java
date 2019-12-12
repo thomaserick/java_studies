@@ -144,6 +144,8 @@ public class UsuarioServelet extends HttpServlet {
 		String bairro = request.getParameter("bairro");
 		String cidade = request.getParameter("cidade");
 		String uf = request.getParameter("uf");
+		String sexo = request.getParameter("sexo");
+		String perfil = request.getParameter("perfil");
 
 		BeanCursoJsp usuario = new BeanCursoJsp();
 
@@ -161,6 +163,8 @@ public class UsuarioServelet extends HttpServlet {
 		usuario.setCidade(cidade);
 		usuario.setBairro(bairro);
 		usuario.setUf(uf);
+		usuario.setSexo(sexo);
+		usuario.setPerfil(perfil);
 
 		if (request.getParameter("ativo") != null && request.getParameter("ativo").equalsIgnoreCase("on")) {
 			usuario.setAtivo(true);
@@ -259,6 +263,15 @@ public class UsuarioServelet extends HttpServlet {
 			}
 			if (user == null || user.isEmpty()) {
 				msg = "Usuário deve ser Informado!";
+				checkField = false;
+			}
+
+			if (sexo == null || sexo.isEmpty()) {
+				msg = "Sexo deve ser Informado!";
+				checkField = false;
+			}
+			if (perfil == null || perfil.isEmpty()) {
+				msg = "PErfil deve ser Informado!";
 				checkField = false;
 			}
 

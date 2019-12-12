@@ -95,17 +95,51 @@
 										name="user" value="${user.user}">
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<div class="form-group">
 									<div class="form-check">
-										<input class="form-check-input" type="checkbox" name="ativo" id="ativo" ${user.ativo ? 'checked': ''} />
-									    <label class="form-check-label"> Ativo </label>
+										<input class="form-check-input" type="checkbox" name="ativo"
+											id="ativo" ${user.ativo ? 'checked': ''} /> <label
+											class="form-check-label"> Ativo </label>
 									</div>
 								</div>
 							</div>
+						</div>
 
+						<div class="row">
+							<div class="col-md-4">
+								<label for="sexo">Sexo: </label>
+								<div class="form-group">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="sexo"
+											id="masculino" value="masculino" ${user.sexo eq 'masculino'? 'checked': ''} /> <label
+											class="form-check-label"> Masculino </label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="sexo"
+											id="feminino" value="feminino" ${user.sexo eq 'feminino'? 'checked': ''} /> <label
+											class="form-check-label"> Feminino </label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="perfil">Perfil:</label>
+									<select id="perfil" name="perfil" class="custom-select">
+									  <option ${user.perfil eq ''? 'selected': ''}></option>
+									  <option value="administrador" ${user.perfil eq 'administrador'? 'selected': ''}>Administrador</option>
+									  <option value="secretario" ${user.perfil eq 'secretario'? 'selected': ''}>Secretário</option>
+									  <option value="gerente" ${user.perfil eq 'gerente'? 'selected': ''}>Gerete</option>
+									  <option value="funcionario" ${user.perfil eq 'funcionario'? 'selected': ''}>Funcionário</option>
+									</select>
+									
+									
+								</div>
+							</div>
+							
 							
 						</div>
+
 
 						<div class="row">
 							<div class="col-md-4">
@@ -295,7 +329,9 @@
 		} else if (document.getElementById("user").value == '') {
 			alert('Informe o Usuário');
 			return false;
-		} 
+		} else if (document.getElementById("sexo").value == '') {
+			alert('Informe o Sexo');
+			return false;
 		return true;
 	}
 
