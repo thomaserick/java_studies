@@ -52,10 +52,10 @@ public class FornecedorDAO {
 
 	}
 
-	public void updateFornecedor(Fornecedor fornecedor) {
+	public void updateFornecedor(Fornecedor fornecedor, Long id) {
 
-		String sql = "SET FORNECEDOR UPDATE razsoc = ?, email = ?, cnpj = ?, endereco = ?, endnum = ?, bairro = ?,"
-				+ "cidade = ?, uf = ?, cep = ?  WHERE id =" + fornecedor.getId();
+		String sql = "UPDATE fornecedor SET razsoc = ?, email = ?, cnpj = ?, endereco = ?, endnum = ?, bairro = ?,"
+				+ "cidade = ?, uf = ?, cep = ?  WHERE id =" + id;
 
 		try {
 			int index = 1;
@@ -86,7 +86,7 @@ public class FornecedorDAO {
 
 	public void deletFornecedor(Long id) {
 
-		String sql = "DELETE FROM FORNECEDOR id =" + id;
+		String sql = "DELETE FROM fornecedor WHERE id =" + id;
 
 		try {
 			PreparedStatement stm = connection.prepareStatement(sql);
@@ -107,7 +107,7 @@ public class FornecedorDAO {
 	public List<Fornecedor> listFornecedor() {
 
 		List<Fornecedor> listar = new ArrayList<Fornecedor>();
-		String sql = "SELECT * FROM FORNECEDOR";
+		String sql = "SELECT * FROM fornecedor";
 
 		try {
 
@@ -142,17 +142,16 @@ public class FornecedorDAO {
 
 	}
 
-	public Fornecedor consult(Long id) throws Exception {
+	public Fornecedor consultId(Long id) throws Exception {
 
 		String sql = "SELECT * FROM FORNECEDOR WHERE id =" + id;
 		PreparedStatement stm = connection.prepareStatement(sql);
-		ResultSet result = stm.executeQuery(sql);
+		ResultSet result = stm.executeQuery();
 
 		while (result.next()) {
 
 			Fornecedor fornecedor = new Fornecedor();
 
-			fornecedor.setId(result.getLong("id"));
 			fornecedor.setId(result.getLong("id"));
 			fornecedor.setRazsoc(result.getString("razsoc"));
 			fornecedor.setEmail(result.getString("email"));
