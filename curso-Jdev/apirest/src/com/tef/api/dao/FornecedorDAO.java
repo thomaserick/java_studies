@@ -20,7 +20,7 @@ public class FornecedorDAO {
 
 	public void saveFornecedor(Fornecedor fornecedor) {
 
-		String sql = "INSERT INTO FORNECEDOR (razsoc,email,cnpj,endereco,endnum,bairro,cidade,uf,cep) VALUES (?,?,?,?,?,?,?,?,?,)";
+		String sql = "INSERT INTO fornecedor(razsoc, email, cnpj, endereco, endnum, bairro, cidade, uf, cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 
