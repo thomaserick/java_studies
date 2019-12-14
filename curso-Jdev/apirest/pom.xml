@@ -35,8 +35,8 @@
 			<artifactId>jersey-container-servlet</artifactId>
 			<version>2.29.1</version>
 		</dependency>
-		
-		<dependency>		
+
+		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>2.29.1</version>
@@ -44,9 +44,20 @@
 
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-moxy</artifactId>     <!-- Faz o gerenciamento em Json -->
+			<artifactId>jersey-media-json-jackson</artifactId>     <!-- Faz o gerenciamento em Json -->
+			<version>2.29.1</version>	
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>  <!-- Core do Jersey -->
+			<artifactId>jersey-common</artifactId>
 			<version>2.29.1</version>
-			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.29.1</version>
 		</dependency>
 
 		<dependency>
