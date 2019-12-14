@@ -25,9 +25,7 @@ public class FornecedorService {
 
 	@PostConstruct
 	private void init() {
-
 		fornecedorDAO = new FornecedorDAO();
-
 	}
 
 	@GET
