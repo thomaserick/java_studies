@@ -104,7 +104,7 @@ public class FornecedorDAO {
 
 	}
 
-	public List<Fornecedor> listar() {
+	public List<Fornecedor> listFornecedor() {
 
 		List<Fornecedor> listar = new ArrayList<Fornecedor>();
 		String sql = "SELECT * FROM FORNECEDOR";
