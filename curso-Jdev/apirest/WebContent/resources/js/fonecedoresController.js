@@ -6,7 +6,6 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 	$scope.fornecedor = {};
 	list();
 
-
 	function list() {
 		$scope.fornecedores = fornecedorService.list().then(function (response) {
 			$scope.fornecedores = response.data
@@ -15,25 +14,29 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 	}
 
 	$scope.save = function (fornecedor) {
+
+		if($scope.formFornec.$invalid){		
+			return;
+		}
+
 		fornecedorService.save(fornecedor).then(list)
-		$scope.fornecedor = {};
+		$scope.fornecedor = {};		
+		$scope.formFornec.$setPristine();
 
 	}
 
-	$scope.edit = function () {
+	$scope.edit = function (fornecedor) {
 		$scope.fornecedor = angular.copy(fornecedor);
 	}
 
 	$scope.delete = function (fornecedor) {
-		fornecedorService.delete(fornecedor)
+		fornecedorService.delete(fornecedor).then(list)
 
 	}
 
-
 	$scope.cancel = function () {
-
-		$scope.fornecedor = {};
-
+		$scope.fornecedor = {};	
+		$scope.formFornec.$setPristine();
 	}
 
 });
@@ -68,7 +71,7 @@ app.service('fornecedorService', function ($http) {
 
 	this.delete = function (fornecedor) {
 
-
+		return $http.delete(api + 'delet/'+ fornecedor.id);
 	}
 
 

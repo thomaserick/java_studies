@@ -37,37 +37,43 @@
 		</div>
 
 
-		<form  id="formFornec">			
+		<form  name="formFornec" id="formFornec" novalidate>	
+			
 			<fieldset class="form-group">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
 							<label for="id">Código</label> <input type="text" class="col-1  form-control" id="id"
 								placeholder="" name="id" readonly="readonly" ng-model="fornecedor.id">
-						</div>
+						</div>						
 
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-8">
 								<div class="form-group">
 									<label for="login">Razão Social</label> <input type="text"
-										class="form-control col-md-6" id="razsoc" placeholder="Razão Social"
-										name="razsoc" ng-model="fornecedor.razsoc">
+										class="form-control"  id="razsoc" placeholder="Razão Social"
+										name="razsoc" ng-model="fornecedor.razsoc" ng-minlength="5" required >	
+											<span class="text-danger" ng-show="formFornec.razsoc.$error.minlength && formFornec.razsoc.$dirty" >* Campo Razão Social precisa ter no mínimo 5 caracteres!</span>		
+										<span class="text-danger" ng-show="formFornec.razsoc.$error.required && formFornec.razsoc.$dirty" >* Campo Razão Social é obrigatório!</span>
+																		
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="cnpj">Cnpj</label> <input type="text" class="form-control col-md-6"
-										id="cnpj" placeholder="Cnpj" name="cnpj" ng-model="fornecedor.cnpj">
+									<label for="cnpj">CNPJ</label><input type="text" class="form-control"
+										id="cnpj" placeholder="CNPJ" name="cnpj" ng-model="fornecedor.cnpj" required>
+									<span class="text-danger" ng-show="formFornec.cnpj.$invalid && formFornec.cnpj.$dirty" >* Campo CNPJ é obrigatório!</span>		
 								</div>
 							</div>
 						</div>
 
 
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-8">
 								<div class="form-group">
-									<label for="email">Email</label> <input type="email" class="form-control col-md-8"
-										id="email" placeholder="Email" name="email">
+									<label for="email">Email</label> <input type="email" class="form-control col-md-6"
+										id="email" placeholder="Email" name="email" ng-model="fornecedor.email" required>
+										<span class="text-danger" ng-show="formFornec.email.$invalid && formFornec.email.$dirty" >* Informe um Email válido!</span>		
 								</div>
 							</div>
 						</div>
@@ -76,8 +82,8 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="cep">Cep:</label> <input type="text" class="form-control col-md-8"
-										id="cep" placeholder="CEP" name="cep" required="" maxlength="8"
-										pattern="[0-9]+$">
+										id="cep" placeholder="CEP" name="cep"  maxlength="8"
+										pattern="[0-9]+$" ng-model="fornecedor.cep">
 								</div>
 							</div>
 						</div>
@@ -86,21 +92,21 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="enderecoo">Endereço:</label> <input type="text" class="form-control"
-										id="endereco" placeholder="Rua" name="endereco">
+										id="endereco" placeholder="Rua" name="endereco" ng-model="fornecedor.endereco">
 								</div>
 							</div>
 
 							<div class="col-md-1">
 								<div class="form-group">
-									<label for="endum">N°:</label> <input type="text" class="form-control" id="endNum"
-										placeholder="" name="endNum">
+									<label for="endum">N°:</label> <input type="text" class="form-control" id="endnum"
+										placeholder="" name="endnum" ng-model="fornecedor.endnum">
 								</div>
 							</div>
 
 							<div class="col-md-5">
 								<div class="form-group">
 									<label for="bairro">Bairro:</label> <input type="text" class="form-control"
-										id="bairro" placeholder="Bairro" name="bairro">
+										id="bairro" placeholder="Bairro" name="bairro" ng-model="fornecedor.bairro">
 								</div>
 							</div>
 						</div>
@@ -109,13 +115,13 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="cidade">Cidade:</label> <input type="text" class="form-control"
-										id="cidade" placeholder="Cidade" name="cidade">
+										id="cidade" placeholder="Cidade" name="cidade" ng-model="fornecedor.cidade">
 								</div>
 							</div>
 							<div class="col-md-1">
 								<div class="form-group">
 									<label for="uf">Estado:</label> <input type="text" class="form-control" id="uf"
-										placeholder="UF" name="uf">
+										placeholder="UF" name="uf" ng-model="fornecedor.uf">
 								</div>
 							</div>
 						</div>
@@ -125,7 +131,7 @@
 
 				<div class="form-group row">
 					<div class="col-4">
-						<button ng-click="save(fornecedor)" class="btn btn-primary">Salvar</button>						
+						<button ng-click="save(fornecedor)" class="btn btn-primary" ng-disabled="formFornec.$invalid" >Salvar</button>						
 						<button ng-click="cancel()" type="button" class="btn btn-danger">Cancelar</button>						
 					</div>
 				</div>
@@ -157,15 +163,15 @@
 							<td>{{fornecedor.id}}</td>
 							<td>{{fornecedor.razsoc}}</td>
 							<td>{{fornecedor.cnpj}}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>{{fornecedor.email}}</td>
+							<td>{{fornecedor.cep}}</td>
+							<td>{{fornecedor.endereco}}</td>
+							<td>{{fornecedor.bairro}}</td>
+							<td>{{fornecedor.cidade}}</td>
+							<td>{{fornecedor.uf}}</td>
 							<td>
-								 <button class="btn btn-primary" title="Editar" ng-click="edit(fornecedor)"><i class="fas fa-user-edit"></i></button></a>
-								 <button class="btn btn-danger" title="Excluir" ng-clicl="delete(fornecedor)"><i class="far fa-trash-alt"></i></button>
+								 <button class="btn btn-primary" title="Editar" ng-click="edit(fornecedor)"><i class="fas fa-user-edit"></i></button>
+								 <button class="btn btn-danger" title="Excluir" ng-click="delete(fornecedor)"><i class="far fa-trash-alt"></i></button>
 							</td>
 						</tr>
 					</tbody>
