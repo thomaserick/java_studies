@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html ng-app="fornecedoresApp">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+
+
+
+	<title>Cadastro de Fornecedor</title>
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="card text-white bg-primary">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-6">
+						<span style="font-size: 30px;">Cadastro de Fornecedor</span>
+					</div>
+					<div class="col-md-6">
+						<ul class="nav nav-pills card-header-pills justify-content-end">
+							<li class="nav-item"><a class="nav-link" href="home.jsp" title="Home"><i
+										class="fas fa-home fa-2x" style="color: white;"></i></a></li>
+							<li class="nav-item"><a class="nav-link" href="index.jsp" title="Sair"><i
+										class="fas fa-sign-out-alt fa-2x" style="color: white;"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<form action="salvarUsuario" method="post" id="formUser" onsubmit="return validarCampos()"
+			enctype="multipart/form-data">
+			<fieldset class="form-group">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="id">C�digo</label> <input type="text" class="col-1  form-control" id="id"
+								placeholder="" name="id" readonly="readonly" value="${user.id}">
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="login">Razão Social</label> <input type="text"
+										class="form-control col-md-6" id="razsoc" placeholder="Razão Social"
+										name="razsoc">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="cnpj">Cnpj</label> <input type="text" class="form-control col-md-6"
+										id="cnpj" placeholder="Cnpj" name="cnpj">
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="email">Email</label> <input type="email" class="form-control col-md-8"
+										id="email" placeholder="Email" name="email">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="cep">Cep:</label> <input type="text" class="form-control col-md-8"
+										id="cep" placeholder="CEP" name="cep" required="" maxlength="8"
+										pattern="[0-9]+$">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="enderecoo">Endereço:</label> <input type="text" class="form-control"
+										id="endereco" placeholder="Rua" name="endereco">
+								</div>
+							</div>
+
+							<div class="col-md-1">
+								<div class="form-group">
+									<label for="endum">N�:</label> <input type="text" class="form-control" id="endNum"
+										placeholder="" name="endNum">
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<div class="form-group">
+									<label for="bairro">Bairro:</label> <input type="text" class="form-control"
+										id="bairro" placeholder="Bairro" name="bairro">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="cidade">Cidade:</label> <input type="text" class="form-control"
+										id="cidade" placeholder="Cidade" name="cidade">
+								</div>
+							</div>
+							<div class="col-md-1">
+								<div class="form-group">
+									<label for="uf">Estado:</label> <input type="text" class="form-control" id="uf"
+										placeholder="UF" name="uf">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<div class="col-4">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a href="salvarUsuario?acao=listaruser">
+							<button type="button" class="btn btn-danger">Cancelar</button>
+						</a>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="container">
+		<div class="row justify-content-center">
+
+			<div class="table-responsive">
+				<table id="cadUser" class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Fornecedor</th>
+							<th>Email</th>
+							<th>Cnpj</th>
+							<th>CEP</th>
+							<th>Endereço</th>
+							<th>Bairro</th>
+							<th>Cidade</th>
+							<th>UF</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+<script	src="resources/js/angular.min.js"></script>
+<script	src="resources/js/dashboard.js"></script>
+<script	src="resources/js/homeController.js"></script>
+</html>
