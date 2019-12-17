@@ -1,41 +1,9 @@
 
-jQuery("input.fone").mask("(99) 99999-999?9").focusout(
-	function (event) {
-		var target, phone, element;
-		target = (event.currentTarget) ? event.currentTarget
-			: event.srcElement;
-		phone = target.value.replace(/\D/g, '');
-		element = $(target);
-		element.unmask();
-		if (phone.length > 10) {
-			element.mask("(99) 99999-999?9");
-		} else {
-			element.mask("(99) 9999-9999?9");
-		}
-	});
-
-function validarCampos() {
-	if (document.getElementById("login").value == '') {
-		alert('Informe Login');
-		return false;
-	} else if (document.getElementById("passwd").value == '') {
-		alert('Informe a Senha');
-		return false;
-	} else if (document.getElementById("user").value == '') {
-		alert('Informe o Usu�rio');
-		return false;
-	} else if (document.getElementById("sexo").value == '') {
-		alert('Informe o Sexo');
-		return false;
-		return true;
-	}
-}
-
 $(document).ready(
 	function () {
 
 		function limpa_formulario_cep() {
-			// Limpa valores do formul�rio de cep. 
+			// Limpa valores do formulário de cep. 
 			$("#endereco").val("");
 			$("#bairro").val("");
 			$("#cidade").val("");
@@ -46,7 +14,7 @@ $(document).ready(
 		$("#cep").blur(
 			function () {
 
-				//Nova vari�vel "cep" somente com d�gitos.
+				//Nova variável "cep" somente com dígitos.
 				var cep = $(this).val().replace(/\D/g, '');
 
 				//Verifica se campo cep possui valor informado.
@@ -85,13 +53,13 @@ $(document).ready(
 							});
 					} //end if.
 					else {
-						//cep � inv�lido.
+						//cep é inválido.
 						limpa_formulario_cep();
 						alert("Formato de CEP inv�lido.");
 					}
 				} //end if.
 				else {
-					//cep sem valor, limpa formul�rio.
+					//cep sem valor, limpa formulário.
 					limpa_formulario_cep();
 				}
 			});
