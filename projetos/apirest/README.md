@@ -14,6 +14,7 @@
 	- JavaEE
 	- Rest 
 	- Tomcat
+	- Postgresql
 
 
 
