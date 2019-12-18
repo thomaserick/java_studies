@@ -9,7 +9,7 @@ Estudos em Java
 
 ## Projetos
 
-- [ApiRest]
+- [ApiRest](https://github.com/thomaserick/java_studies/tree/master/projetos/apirest)
 
 
 ## Programadores Java
