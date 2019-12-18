@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html ng-app="fornecedoresApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+	<script	src="resources/js/angular.min.js"></script>
+	<script src="resources/js/angular-viacep.js"></script>
+
+	<title>Cadastro de Fornecedores</title>
+
+</head>
+
+<body ng-controller="fornecedoresController">
+	<div class="container">
+
+		<div class="card text-white bg-danger">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-6">
+						<span style="font-size: 30px;">Cadastro de Fornecedores</span>
+					</div>
+					<div class="col-md-6">
+						<!-- <ul class="nav nav-pills card-header-pills justify-content-end">
+							<li class="nav-item"><a class="nav-link" href="home.jsp" title="Home"><i
+										class="fas fa-home fa-2x" style="color: white;"></i></a></li>
+							<li class="nav-item"><a class="nav-link" href="index.jsp" title="Sair"><i
+										class="fas fa-sign-out-alt fa-2x" style="color: white;"></i></a></li>
+						</ul> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<form  name="formFornec" id="formFornec" novalidate via-cep-form>	
+			
+			<fieldset class="form-group">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="id">Código</label> <input type="text" class="col-1  form-control" id="id"
+								placeholder="" name="id" readonly="readonly" ng-model="fornecedor.id">
+						</div>						
+
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<label for="login">Razão Social</label> <input type="text"
+										class="form-control"  id="razsoc" placeholder="Razão Social"
+										name="razsoc" ng-model="fornecedor.razsoc" ng-minlength="5" required >	
+											<span class="text-danger" ng-show="formFornec.razsoc.$error.minlength && formFornec.razsoc.$dirty" >* Campo Razão Social precisa ter no mínimo 5 caracteres!</span>		
+										<span class="text-danger" ng-show="formFornec.razsoc.$error.required && formFornec.razsoc.$dirty" >* Campo Razão Social é obrigatório!</span>
+																		
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="cnpj">CNPJ</label><input type="text" class="form-control"
+										id="cnpj" placeholder="" name="cnpj" ng-model="fornecedor.cnpj" required ui-mask="99.999.999/9999-99" ui-mask-placeholder ui-mask-placeholder-char="_" model-view-value="true" >
+									<span class="text-danger" ng-show="formFornec.cnpj.$invalid && formFornec.cnpj.$dirty" >* Campo CNPJ é obrigatório!</span>		
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<label for="email">Email</label> <input type="email" class="form-control col-md-6"
+										id="email" placeholder="Email" name="email" ng-model="fornecedor.email" required>
+										<span class="text-danger" ng-show="formFornec.email.$invalid && formFornec.email.$dirty" >* Informe um Email válido!</span>		
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="cep">Cep:</label> <input type="text" class="form-control col-md-8"
+										id="cep" placeholder="CEP" name="cep"  maxlength="8"
+										pattern="[0-9]+$" ng-model="fornecedor.cep" via-cep="cep">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="enderecoo">Endereço:</label> <input type="text" class="form-control"
+										id="endereco" placeholder="Rua" name="endereco" ng-model="fornecedor.endereco" via-cep="logradouro">
+								</div>
+							</div>
+
+							<div class="col-md-1">
+								<div class="form-group">
+									<label for="endum">N°:</label> <input type="text" class="form-control" id="endnum"
+										placeholder="" name="endnum" ng-model="fornecedor.endnum">
+								</div>
+							</div>
+
+							<div class="col-md-5">
+								<div class="form-group">
+									<label for="bairro">Bairro:</label> <input type="text" class="form-control"
+										id="bairro" placeholder="Bairro" name="bairro" ng-model="fornecedor.bairro" via-cep="bairro">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="cidade">Cidade:</label> <input type="text" class="form-control"
+										id="cidade" placeholder="Cidade" name="cidade" ng-model="fornecedor.cidade" via-cep="localidade">
+								</div>
+							</div>
+							<div class="col-md-1">
+								<div class="form-group">
+									<label for="uf">Estado:</label> <input type="text" class="form-control" id="uf"
+										placeholder="UF" name="uf" ng-model="fornecedor.uf" via-cep="uf">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<div class="col-4">
+						<button ng-click="save(fornecedor)" class="btn btn-primary" ng-disabled="formFornec.$invalid" >Salvar</button>						
+						<button ng-click="cancel()" type="button" class="btn btn-danger">Cancelar</button>						
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+	<div class="container">
+		<div class="row justify-content-center">
+
+			<div class="table-responsive">
+				<table id="cadUser" class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Código</th>
+							<th>Fornecedor</th>
+							<th>Cnpj</th>
+							<th>Email</th>							
+							<th>CEP</th>
+							<th>Endereço</th>
+							<th>Bairro</th>
+							<th>Cidade</th>
+							<th>UF</th>
+							<th>Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="fornecedor in fornecedores track by $index">
+							<td ng-dblclick="edit(fornecedor)">{{fornecedor.id}}</td>
+							<td>{{fornecedor.razsoc}}</td>
+							<td>{{fornecedor.cnpj}}</td>
+							<td>{{fornecedor.email}}</td>
+							<td>{{fornecedor.cep }}</td>
+							<td>{{fornecedor.endereco}}, {{fornecedor.endnum}}</td>
+							<td>{{fornecedor.bairro}}</td>
+							<td>{{fornecedor.cidade}}</td>
+							<td>{{fornecedor.uf}}</td>
+							<td>
+								 <button class="btn btn-primary" title="Editar" ng-click="edit(fornecedor)"><i class="fas fa-user-edit"></i></button>
+								 <button class="btn btn-danger" title="Excluir" ng-click="delete(fornecedor)"><i class="far fa-trash-alt"></i></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	
+	
+	<script	src="resources/js/dashboard.js"></script>
+	<script	src="resources/js/fonecedoresController.js"></script>
+		<script	src="resources/js/angular-ui-utils.js"></script>
+</body>
+</html>
