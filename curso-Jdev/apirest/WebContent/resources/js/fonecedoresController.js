@@ -1,4 +1,4 @@
-var app = angular.module('fornecedoresApp', ['angular.viacep','ui.mask']);
+var app = angular.module('fornecedoresApp', ['angular.viacep', 'ui.mask']);
 
 app.controller('fornecedoresController', function ($scope, fornecedorService) {
 
@@ -13,21 +13,21 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 		})
 	}
 
-	function clear(){
-		$scope.fornecedor = {};		
+	function clear() {
+		$scope.fornecedor = {};
 		$scope.formFornec.$setPristine();
 	}
-	
+
 
 	$scope.save = function (fornecedor) {
 
-		if($scope.formFornec.$invalid){		
+		if ($scope.formFornec.$invalid) {
 			return;
 		}
 
 		fornecedorService.save(fornecedor).then(list)
 		clear();
-		
+
 
 	}
 
@@ -50,9 +50,7 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 
 app.service('fornecedorService', function ($http) {
 
-
 	var api = "/apirest/rest/fornecedor/"
-
 
 	this.list = function () {
 
@@ -62,6 +60,7 @@ app.service('fornecedorService', function ($http) {
 
 	this.save = function (fornecedor) {
 
+		/* fornecedor.cnpj = fornecedor.cnpj.replace(/[^\d]+/g,''); */
 
 		if (fornecedor.id) {
 
@@ -69,7 +68,7 @@ app.service('fornecedorService', function ($http) {
 
 		} else {
 
-			return $http.post(api+'add', fornecedor)
+			return $http.post(api + 'add', fornecedor)
 
 		}
 
@@ -77,7 +76,7 @@ app.service('fornecedorService', function ($http) {
 
 	this.delete = function (fornecedor) {
 
-		return $http.delete(api + 'delet/'+ fornecedor.id);
+		return $http.delete(api + 'delet/' + fornecedor.id);
 	}
 
 
