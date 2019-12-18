@@ -10,6 +10,7 @@ Estudos em Java
 ## Projetos
 
 - [ApiRest](https://github.com/thomaserick/java_studies/tree/master/projetos/apirest)
+- [Servlets e JSP](https://github.com/thomaserick/java_studies/tree/master/curso-Jdev/curso-jsp)
 
 
 ## Programadores Java
