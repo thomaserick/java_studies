@@ -1,4 +1,4 @@
-var app = angular.module('fornecedoresApp', []);
+var app = angular.module('fornecedoresApp', ['angular.viacep']);
 
 app.controller('fornecedoresController', function ($scope, fornecedorService) {
 
@@ -13,6 +13,12 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 		})
 	}
 
+	function clear(){
+		$scope.fornecedor = {};		
+		$scope.formFornec.$setPristine();
+	}
+	
+
 	$scope.save = function (fornecedor) {
 
 		if($scope.formFornec.$invalid){		
@@ -20,8 +26,8 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 		}
 
 		fornecedorService.save(fornecedor).then(list)
-		$scope.fornecedor = {};		
-		$scope.formFornec.$setPristine();
+		clear();
+		
 
 	}
 
@@ -35,9 +41,9 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 	}
 
 	$scope.cancel = function () {
-		$scope.fornecedor = {};	
-		$scope.formFornec.$setPristine();
+		clear();
 	}
+
 
 });
 
@@ -73,11 +79,6 @@ app.service('fornecedorService', function ($http) {
 
 		return $http.delete(api + 'delet/'+ fornecedor.id);
 	}
-
-
-
-
-
 
 
 });

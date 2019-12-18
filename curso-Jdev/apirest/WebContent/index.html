@@ -11,6 +11,9 @@
 	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
 
+	<script	src="resources/js/angular.min.js"></script>
+	<script src="resources/js/angular-viacep.js"></script>
+
 	<title>Cadastro de Fornecedores</title>
 
 </head>
@@ -18,7 +21,7 @@
 <body ng-controller="fornecedoresController">
 	<div class="container">
 
-		<div class="card text-white bg-primary">
+		<div class="card text-white bg-danger">
 			<div class="card-header">
 				<div class="row">
 					<div class="col-md-6">
@@ -37,7 +40,7 @@
 		</div>
 
 
-		<form  name="formFornec" id="formFornec" novalidate>	
+		<form  name="formFornec" id="formFornec" novalidate via-cep-form>	
 			
 			<fieldset class="form-group">
 				<div class="row">
@@ -83,7 +86,7 @@
 								<div class="form-group">
 									<label for="cep">Cep:</label> <input type="text" class="form-control col-md-8"
 										id="cep" placeholder="CEP" name="cep"  maxlength="8"
-										pattern="[0-9]+$" ng-model="fornecedor.cep">
+										pattern="[0-9]+$" ng-model="fornecedor.cep" via-cep="cep">
 								</div>
 							</div>
 						</div>
@@ -92,7 +95,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="enderecoo">Endereço:</label> <input type="text" class="form-control"
-										id="endereco" placeholder="Rua" name="endereco" ng-model="fornecedor.endereco">
+										id="endereco" placeholder="Rua" name="endereco" ng-model="fornecedor.endereco" via-cep="logradouro">
 								</div>
 							</div>
 
@@ -106,7 +109,7 @@
 							<div class="col-md-5">
 								<div class="form-group">
 									<label for="bairro">Bairro:</label> <input type="text" class="form-control"
-										id="bairro" placeholder="Bairro" name="bairro" ng-model="fornecedor.bairro">
+										id="bairro" placeholder="Bairro" name="bairro" ng-model="fornecedor.bairro" via-cep="bairro">
 								</div>
 							</div>
 						</div>
@@ -115,13 +118,13 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="cidade">Cidade:</label> <input type="text" class="form-control"
-										id="cidade" placeholder="Cidade" name="cidade" ng-model="fornecedor.cidade">
+										id="cidade" placeholder="Cidade" name="cidade" ng-model="fornecedor.cidade" via-cep="localidade">
 								</div>
 							</div>
 							<div class="col-md-1">
 								<div class="form-group">
 									<label for="uf">Estado:</label> <input type="text" class="form-control" id="uf"
-										placeholder="UF" name="uf" ng-model="fornecedor.uf">
+										placeholder="UF" name="uf" ng-model="fornecedor.uf" via-cep="uf">
 								</div>
 							</div>
 						</div>
@@ -165,7 +168,7 @@
 							<td>{{fornecedor.cnpj}}</td>
 							<td>{{fornecedor.email}}</td>
 							<td>{{fornecedor.cep}}</td>
-							<td>{{fornecedor.endereco}}</td>
+							<td>{{fornecedor.endereco}}, {{fornecedor.endnum}}</td>
 							<td>{{fornecedor.bairro}}</td>
 							<td>{{fornecedor.cidade}}</td>
 							<td>{{fornecedor.uf}}</td>
@@ -182,7 +185,7 @@
 	</div>
 
 	
-	<script	src="resources/js/angular.min.js"></script>
+	
 	<script	src="resources/js/dashboard.js"></script>
 	<script	src="resources/js/fonecedoresController.js"></script>
 </body>
