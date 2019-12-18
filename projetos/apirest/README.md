@@ -17,7 +17,7 @@
 
 
 
-![index](https://github.com/thomaserick/java_studies/blob/master/projetos/img/index.png)
+![index](https://github.com/thomaserick/java_studies/blob/master/projetos/apirest/img/index.png)
 
 	
  
