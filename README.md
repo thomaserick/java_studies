@@ -7,6 +7,11 @@ Estudos em Java
 - [FullStack](https://github.com/thomaserick/java_studies/tree/master/curso-Jdev)
 - [Curso em Video](https://github.com/thomaserick/java_studies/tree/master/poo)
 
+## Projetos
+
+- [ApiRest]
+
+
 ## Programadores Java
 - JDK (Java Development KIT)
     - JRE
