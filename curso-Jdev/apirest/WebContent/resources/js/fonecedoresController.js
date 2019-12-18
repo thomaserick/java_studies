@@ -1,4 +1,4 @@
-var app = angular.module('fornecedoresApp', ['angular.viacep']);
+var app = angular.module('fornecedoresApp', ['angular.viacep','ui.mask']);
 
 app.controller('fornecedoresController', function ($scope, fornecedorService) {
 

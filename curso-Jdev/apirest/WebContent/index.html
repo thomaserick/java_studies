@@ -64,7 +64,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label for="cnpj">CNPJ</label><input type="text" class="form-control"
-										id="cnpj" placeholder="CNPJ" name="cnpj" ng-model="fornecedor.cnpj" required>
+										id="cnpj" placeholder="" name="cnpj" ng-model="fornecedor.cnpj" required ui-mask="99.999.999/9999-99" ui-mask-placeholder ui-mask-placeholder-char="#" model-view-value="true" >
 									<span class="text-danger" ng-show="formFornec.cnpj.$invalid && formFornec.cnpj.$dirty" >* Campo CNPJ é obrigatório!</span>		
 								</div>
 							</div>
@@ -188,5 +188,6 @@
 	
 	<script	src="resources/js/dashboard.js"></script>
 	<script	src="resources/js/fonecedoresController.js"></script>
+		<script	src="resources/js/angular-ui-utils.js"></script>
 </body>
 </html>
