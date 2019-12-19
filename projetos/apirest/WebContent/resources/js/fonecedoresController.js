@@ -1,9 +1,17 @@
-var app = angular.module('fornecedoresApp', ['angular.viacep', 'ui.mask']);
+var app = angular.module('fornecedoresApp', ['angular.viacep', 'ui.mask', 'angular-growl', 'ngAnimate']);
 
-app.controller('fornecedoresController', function ($scope,$window, fornecedorService) {
+angular.module('fornecedoresApp').config(['growlProvider', function (growlProvider) {
+  //Configuração do tempo que a mensagem ficará na tela
+   growlProvider.globalInlineMessages(true);
+   growlProvider.globalDisableCountDown(true);
+   growlProvider.globalTimeToLive(3000);
+}]);
+
+app.controller('fornecedoresController', function ($scope,$window,fornecedorService,growl) {
 
 
 	$scope.fornecedor = {};
+	var config = {};
 	list();
 
 	function list() {
@@ -24,9 +32,15 @@ app.controller('fornecedoresController', function ($scope,$window, fornecedorSer
 		if ($scope.formFornec.$invalid) {
 			return;
 		}
-
-		fornecedorService.save(fornecedor).then(list)
+		
+		fornecedorService.save(fornecedor).then(list)	
+		if(fornecedor.id){
+			growl.success("<b>Fornecedor alterado com Sucesso</b>", config);
+		}else {
+			growl.success("<b>Fornecedor incluido com Sucesso</b>", config);
+		}
 		clear();
+		
 
 	}
 
@@ -38,6 +52,7 @@ app.controller('fornecedoresController', function ($scope,$window, fornecedorSer
 
 		if($window.confirm("Deseja realmente excluir esse registro?")){
 			fornecedorService.delete(fornecedor).then(list)
+			growl.success("<b>Fornecedor deletado com Sucesso</b>", config);
 		}
 	
 	}
@@ -52,8 +67,7 @@ app.controller('fornecedoresController', function ($scope,$window, fornecedorSer
 
 app.service('fornecedorService', function ($http) {
 
-	var api = "/apirest/rest/fornecedor/"
-
+	var api = "/apirest/rest/fornecedor/"	
 	this.list = function () {
 
 		return $http.get(api + 'list');
@@ -65,19 +79,17 @@ app.service('fornecedorService', function ($http) {
 		/* fornecedor.cnpj = fornecedor.cnpj.replace(/[^\d]+/g,''); */
 
 		if (fornecedor.id) {
-
+			
 			return $http.put(api + 'edit/' + fornecedor.id, fornecedor)
-
+			
 		} else {
-
+			
 			return $http.post(api + 'add', fornecedor)
-
-		}
+		}		
 
 	}
 
 	this.delete = function (fornecedor) {
-
 
 		return $http.delete(api + 'delet/' + fornecedor.id);
 	}

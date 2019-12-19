@@ -11,9 +11,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+	<link rel="stylesheet" href="resources/css/angular-growl.css">
 
 	<script	src="resources/js/angular.min.js"></script>
 	<script src="resources/js/angular-viacep.js"></script>
+	<script src="resources/js/angular-growl.js"></script>
+	<script src="resources/js/angular-animate.min.js"></script>
+	<script src="resources/js/angular-sanitize.min.js"></script>
 
 	<title>Cadastro de Fornecedores</title>
 
@@ -38,8 +42,9 @@
 		<form  name="formFornec" id="formFornec" novalidate via-cep-form>	
 			
 			<fieldset class="form-group">
-				<div class="row">
-					<div class="col-md-12">
+				<div class="row">					
+					<div class="col-md-12">						
+						<div class="alert" growl></div>					
 						<div class="form-group">
 							<label for="id">Código</label> <input type="text" class="col-2 col-md-1  form-control" id="id"
 								placeholder="" name="id" readonly="readonly" ng-model="fornecedor.id">
