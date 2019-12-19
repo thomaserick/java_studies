@@ -28,7 +28,6 @@ app.controller('fornecedoresController', function ($scope,$window, fornecedorSer
 		fornecedorService.save(fornecedor).then(list)
 		clear();
 
-
 	}
 
 	$scope.edit = function (fornecedor) {
