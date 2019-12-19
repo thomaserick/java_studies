@@ -1,5 +1,7 @@
 # ApiRest com AngularJs 1.x
 
+### Projeto hospedado na [Heroku](https://apirestangular.herokuapp.com/) 
+
 ## Tecnologias
 
 - Front-end
@@ -16,9 +18,13 @@
 	- Tomcat
 	- Postgresql
 
-### Projeto hospedado na [Heroku](https://apirestangular.herokuapp.com/)
+
 
 ![index](https://github.com/thomaserick/java_studies/blob/master/projetos/apirest/img/index.png)
+
+**Helpers**
+
+- [Format GitHub](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
 	
  
