@@ -9,6 +9,7 @@ public class SingleConnection {
 	private static String banco = "jdbc:postgresql://localhost:5432/curso-jsp?autoReconnect=true";
 	private static String password = "admin";
 	private static String user = "postgres";
+
 	private static Connection connection = null;
 
 	/* Estanciar a classe executa a conexão */
@@ -28,7 +29,7 @@ public class SingleConnection {
 				Class.forName("org.postgresql.Driver");
 				connection = DriverManager.getConnection(banco, user, password);
 				connection.setAutoCommit(false);
-				/* System.out.println("Conexão com Sucesso"); */
+				System.out.println("Conexão com Sucesso");
 			}
 
 		} catch (Exception e) {

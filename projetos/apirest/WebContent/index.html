@@ -27,13 +27,7 @@
 					<div class="col-md-6">
 						<span style="font-size: 30px;">Cadastro de Fornecedores</span>
 					</div>
-					<div class="col-md-6">
-						<!-- <ul class="nav nav-pills card-header-pills justify-content-end">
-							<li class="nav-item"><a class="nav-link" href="home.jsp" title="Home"><i
-										class="fas fa-home fa-2x" style="color: white;"></i></a></li>
-							<li class="nav-item"><a class="nav-link" href="index.jsp" title="Sair"><i
-										class="fas fa-sign-out-alt fa-2x" style="color: white;"></i></a></li>
-						</ul> -->
+					<div class="col-md-6">						
 					</div>
 				</div>
 			</div>
@@ -46,7 +40,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="id">Código</label> <input type="text" class="col-1  form-control" id="id"
+							<label for="id">Código</label> <input type="text" class="col-2 col-md-1  form-control" id="id"
 								placeholder="" name="id" readonly="readonly" ng-model="fornecedor.id">
 						</div>						
 
@@ -133,7 +127,7 @@
 
 
 				<div class="form-group row">
-					<div class="col-4">
+					<div class="col-12">
 						<button ng-click="save(fornecedor)" class="btn btn-primary" ng-disabled="formFornec.$invalid" >Salvar</button>						
 						<button ng-click="cancel()" type="button" class="btn btn-danger">Cancelar</button>						
 					</div>
@@ -183,11 +177,7 @@
 			</div>
 		</div>
 	</div>
-
-	
-	
-	<script	src="resources/js/dashboard.js"></script>
 	<script	src="resources/js/fonecedoresController.js"></script>
-		<script	src="resources/js/angular-ui-utils.js"></script>
+	<script	src="resources/js/angular-ui-utils.js"></script>
 </body>
 </html>
