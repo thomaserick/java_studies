@@ -6,17 +6,21 @@ import java.sql.DriverManager;
 /*Responsavel por fazer a Conexão com Banco de dados*/
 public class SingleConnection {
 
-	/*
-	 * private static String banco =
-	 * "jdbc:postgresql://localhost:5432/neomind?autoReconnect=true"; private static
-	 * String password = "admin"; private static String user = "postgres";
-	 */
+	
+	  private static String banco =
+	  "jdbc:postgresql://localhost:5432/neomind?autoReconnect=true"; private static
+	  String password = "admin"; private static String user = "postgres";
+	 
 
 	/* Heroku */
 
-	private static String banco = "jdbc:postgresql://ec2-107-21-209-1.compute-1.amazonaws.com:5432/dbsp7cicdfhgbf?sslmode=require";
-	private static String password = "edb6abd39756fb24a5875b15f6da7530eebe2c0118d2e798a682a3616907b3b2";
-	private static String user = "btcucseidvygag";
+	/*
+	 * private static String banco =
+	 * "jdbc:postgresql://ec2-107-21-209-1.compute-1.amazonaws.com:5432/dbsp7cicdfhgbf?sslmode=require";
+	 * private static String password =
+	 * "edb6abd39756fb24a5875b15f6da7530eebe2c0118d2e798a682a3616907b3b2"; private
+	 * static String user = "btcucseidvygag";
+	 */
 
 	private static Connection connection = null;
 

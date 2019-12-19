@@ -1,6 +1,6 @@
 var app = angular.module('fornecedoresApp', ['angular.viacep', 'ui.mask']);
 
-app.controller('fornecedoresController', function ($scope, fornecedorService) {
+app.controller('fornecedoresController', function ($scope,$window, fornecedorService) {
 
 
 	$scope.fornecedor = {};
@@ -36,8 +36,11 @@ app.controller('fornecedoresController', function ($scope, fornecedorService) {
 	}
 
 	$scope.delete = function (fornecedor) {
-		fornecedorService.delete(fornecedor).then(list)
 
+		if($window.confirm("Deseja realmente excluir esse registro?")){
+			fornecedorService.delete(fornecedor).then(list)
+		}
+	
 	}
 
 	$scope.cancel = function () {
@@ -75,6 +78,7 @@ app.service('fornecedorService', function ($http) {
 	}
 
 	this.delete = function (fornecedor) {
+
 
 		return $http.delete(api + 'delet/' + fornecedor.id);
 	}
