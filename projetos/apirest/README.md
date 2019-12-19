@@ -1,4 +1,6 @@
-# ApiRest com AngularJs 1.x
+# ApiRest - (Java e AngularJs 1.x)
+
+Projeto realizado para um desafio FullStack, fazer um CRUD de fornecedores usando Rest.
 
 ### Projeto hospedado na [Heroku](https://apirestangular.herokuapp.com/) 
 
