@@ -16,7 +16,7 @@
 	- Tomcat
 	- Postgresql
 
-
+[Heroku](https://apirestangular.herokuapp.com/)
 
 ![index](https://github.com/thomaserick/java_studies/blob/master/projetos/apirest/img/index.png)
 
