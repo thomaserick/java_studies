@@ -68,12 +68,7 @@
 <script type="text/javascript">
 	function testarExcecao() {
 		
-		var valorInformado = $('#txtinput').val();
-		
-		
-		
-		
-		
+		var valorInformado = $('#txtinput').val();				
 		
 	}
 </script>

@@ -8,7 +8,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
+	type="text/javascript"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script
@@ -32,27 +34,21 @@
 	<div class="container">
 
 		<div class="card text-white ">
-		
-			 <h5 class="card-header text-center bg-primary">Recursos Avançados em Java</h5>
+
+			<h5 class="card-header text-center bg-primary">Recursos
+				Avançados em Java</h5>
 			<div class="card-body">
-			
-			  <a href="pages/capturarExcecoes.jsp" class="btn btn-secondary">Capturar Exceções</a>
-			
+
+				<a href="pages/capturarExcecoes.jsp" class="btn btn-secondary">Capturar
+					Exceções</a>
+
 			</div>
 		</div>
-		
-		
+
+
 	</div>
 
-	
 
+	<script src="./resources/js/main.js" type="text/javascript"></script>
 </body>
-
-
-<script type="text/javascript">
-
-
-</script>
-
-
 </html>
