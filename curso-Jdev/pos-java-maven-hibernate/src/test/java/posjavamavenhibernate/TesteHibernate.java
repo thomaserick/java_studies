@@ -1,5 +1,7 @@
 package posjavamavenhibernate;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import dao.DaoGeneric;
@@ -54,13 +56,60 @@ public class TesteHibernate {
 	 * System.out.println(user); }
 	 */
 
+	/*
+	 * @Test public void testeDelete() {
+	 * 
+	 * DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>(); UserPerson
+	 * user = daoGeneric.consultarId(1L, UserPerson.class);
+	 * 
+	 * daoGeneric.delete(user);
+	 * 
+	 * }
+	 */
+
+	/*
+	 * @Test public void testeConsultaAll() {
+	 * 
+	 * DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
+	 * List<UserPerson> list = daoGeneric.listar(UserPerson.class);
+	 * 
+	 * for (UserPerson userPerson : list) { System.out.println(userPerson);
+	 * System.out.println("--------------------------------------"); }
+	 * 
+	 * }
+	 */
+
+	/*
+	 * @Test public void testeQuery() {
+	 * 
+	 * DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
+	 * List<UserPerson> list =
+	 * daoGeneric.getEntityManager().createQuery("from UserPerson where id = 3")
+	 * .getResultList();
+	 * 
+	 * for (UserPerson userPerson : list) {
+	 * 
+	 * System.out.println(userPerson);
+	 * System.out.println("-------------------------------");
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
+
 	@Test
-	public void testeDelete() {
+	public void testeQueryMaxResult() {
 
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
-		UserPerson user = daoGeneric.consultarId(1L, UserPerson.class);
+		List<UserPerson> list = daoGeneric.getEntityManager().createQuery(" from UserPerson order by id")
+				.setMaxResults(2).getResultList();
 
-		daoGeneric.delete(user);
+		for (UserPerson userPerson : list) {
+
+			System.out.println(userPerson);
+			System.out.println("-------------------------------");
+
+		}
 
 	}
 
