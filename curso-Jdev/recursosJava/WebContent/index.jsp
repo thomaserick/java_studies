@@ -41,14 +41,17 @@
 
 				<a href="pages/capturarExcecoes.jsp" class="btn btn-secondary">Capturar
 					Exceções</a>
+					
+				<a href="pages/filterAutenticacao.jsp" class="btn btn-warning">Filter Autenticação</a>
+				
+				<a href="pages/paginaPai.jsp" class="btn btn-info">Load JQuery</a>
+				
+				<a href="pages/progressbar.jsp" class="btn btn-dark">Progress Bar</a>
+				
+				<a href="pages/ServletAutenticacao?deslogar=true" class="btn btn-danger">Deslogar</a>
 
 			</div>
 		</div>
-
-
-	</div>
-
-
-	<script src="./resources/js/main.js" type="text/javascript"></script>
+	</div>	
 </body>
 </html>

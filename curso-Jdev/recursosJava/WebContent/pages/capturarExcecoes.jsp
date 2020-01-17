@@ -63,13 +63,6 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="../resources/js/main.js"></script>
 </body>
-
-<script type="text/javascript">
-	function testarExcecao() {
-		
-		var valorInformado = $('#txtinput').val();				
-		
-	}
-</script>
 </html>
