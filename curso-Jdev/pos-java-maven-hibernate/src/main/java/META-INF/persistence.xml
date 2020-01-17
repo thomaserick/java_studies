@@ -6,6 +6,7 @@
 
 	<persistence-unit name="pos-java-maven-hibernate">
 
+	<class>model.UserPerson</class>
 
 		<!-- Dados de conexão com o BD -->
 		<properties>
@@ -13,9 +14,12 @@
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/posjavahibernate"></property>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"></property>
 			
+			<!-- Conexão -->
 			<property name="hibernate.connection.username" value="postgres"></property>
 			<property name="hibernate.connection.password" value="admin"></property>
-			<property name="hibernate.hbm2dll.auto" value="update"></property>
+			
+			<!-- Faz atualização -->
+			<property name="hibernate.hbm2ddl.auto" value="none"></property>
 
 		</properties>
 
