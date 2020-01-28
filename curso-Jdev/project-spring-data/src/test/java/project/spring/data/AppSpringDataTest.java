@@ -108,4 +108,11 @@ public class AppSpringDataTest {
 
 	}
 
+	@Test
+	public void testeDeletePorNome() {
+
+		interfaceSpringData.deletePorNome("Jaqueline");
+
+	}
+
 }
