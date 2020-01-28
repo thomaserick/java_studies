@@ -33,12 +33,29 @@ public class AppSpringDataTest {
 	@Test
 	public void testeConsulta() {
 
-		Optional<UserSpringData> userSpringData = interfaceSpringData.findById(1L);
+		Optional<UserSpringData> userSpringData = interfaceSpringData.findById(4L);
 
 		System.out.println(userSpringData.get().getId());
 		System.out.println(userSpringData.get().getName());
 		System.out.println(userSpringData.get().getLogin());
 		System.out.println(userSpringData.get().getEmail());
+
+	}
+
+	@Test
+	public void testeConsultaAll() {
+
+		Iterable<UserSpringData> lista = interfaceSpringData.findAll();
+
+		for (UserSpringData userSpringData : lista) {
+
+			System.out.println(userSpringData.getId());
+			System.out.println(userSpringData.getName());
+			System.out.println(userSpringData.getLogin());
+			System.out.println(userSpringData.getEmail());
+
+			System.out.println("-----------------------------------");
+		}
 
 	}
 
