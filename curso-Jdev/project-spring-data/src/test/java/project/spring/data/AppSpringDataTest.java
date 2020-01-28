@@ -71,4 +71,11 @@ public class AppSpringDataTest {
 
 	}
 
+	@Test
+	public void testeDelete() {
+
+		interfaceSpringData.deleteById(4L);
+
+	}
+
 }
