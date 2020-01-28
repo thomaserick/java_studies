@@ -96,4 +96,16 @@ public class AppSpringDataTest {
 
 	}
 
+	@Test
+	public void testeConsultaNomeParam() {
+
+		UserSpringData userSpringData = interfaceSpringData.buscaPorNomeParam("Thomas");
+
+		System.out.println(userSpringData.getId());
+		System.out.println(userSpringData.getName());
+		System.out.println(userSpringData.getLogin());
+		System.out.println(userSpringData.getEmail());
+
+	}
+
 }
