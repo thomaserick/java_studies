@@ -115,4 +115,9 @@ public class AppSpringDataTest {
 
 	}
 
+	@Test
+	public void testeUpdatePorNome() {
+		interfaceSpringData.updateEmailPorNome("thomaserick@gmail.com", "Thomas");
+	}
+
 }
