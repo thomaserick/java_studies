@@ -32,14 +32,14 @@ public class Cliente implements Serializable {
 	private String cpfCnpj;
 	private Integer tipo;
 		
-	
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedido = new ArrayList<>();
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
-	//Nao aceita repetição
+	//Não aceita repetição
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();

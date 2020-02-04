@@ -1,7 +1,11 @@
 package com.tef.cursomc.domain;
 
+import javax.persistence.Entity;
+
 import com.tef.cursomc.domain.enums.EstadoPagamento;
 
+
+@Entity
 public class PagamentoComCartao extends Pagamento{
 	
 	/**

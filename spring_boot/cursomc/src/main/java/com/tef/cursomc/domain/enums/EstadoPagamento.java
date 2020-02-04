@@ -38,8 +38,7 @@ public enum EstadoPagamento {
 		
 		if(codigo == null) {
 			return null;
-		}
-		
+		}		
 		
 		//Procura o codigo e retorna 
 		for(EstadoPagamento x : EstadoPagamento.values()) {			
