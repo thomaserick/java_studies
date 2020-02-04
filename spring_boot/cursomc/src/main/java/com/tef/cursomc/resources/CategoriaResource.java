@@ -2,7 +2,6 @@ package com.tef.cursomc.resources;
 
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +45,14 @@ public class CategoriaResource {
 	categoria.setId(id);
 	categoria = categoriaservice.update(categoria);
 	return ResponseEntity.noContent().build();		
+		
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		 categoriaservice.delete(id);
+		return ResponseEntity.noContent().build();
+		
 		
 	}
 	
