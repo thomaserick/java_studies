@@ -12,10 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.tef.cursomc.domain.enums.TipoCliente;
 
 @Entity
@@ -33,8 +32,10 @@ public class Cliente implements Serializable {
 	private String cpfCnpj;
 	private Integer tipo;
 		
+	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
-	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//Nao aceita repetição
 	@ElementCollection
