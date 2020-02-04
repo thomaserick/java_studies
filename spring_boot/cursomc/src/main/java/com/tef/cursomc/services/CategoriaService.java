@@ -34,13 +34,13 @@ public class CategoriaService {
 		return categoriaRepository.save(categoria);
 	}
 
-	public Void delete(Integer id) {
+	public void delete(Integer id) {
 		find(id);
 		
 		try {
 			categoriaRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel excuir uma Categoria que possui produtos");
+			throw new DataIntegrityException("Não é possivel excluir uma Categoria que possui produtos");
 
 		}
 	}
