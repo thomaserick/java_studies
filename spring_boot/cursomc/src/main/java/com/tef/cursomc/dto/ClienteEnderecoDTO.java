@@ -2,21 +2,43 @@ package com.tef.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.tef.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteEnderecoDTO implements Serializable {
 		
 	private static final long serialVersionUID = 1L;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min=5,max=120,message = "O tamnho deve ser entre 5 e 120 caracteres")	
 	private String name;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Email(message = "Email inválido")
 	private String email;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")	
 	private String cpfCnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String logradouro;
 	private String numend;
-	private String complemento;
+	private String complemento;	
 	private String bairro;
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String cep;	
 	
+	@NotEmpty(message = "Preenchimento obrigatório")
 	private String telefone1;
+	
 	private String telefone2;
 	
 	private Integer cidadeId;
