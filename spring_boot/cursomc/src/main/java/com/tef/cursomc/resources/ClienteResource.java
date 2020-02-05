@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.tef.cursomc.domain.Cliente;
 import com.tef.cursomc.dto.ClienteDTO;
+import com.tef.cursomc.dto.ClienteEnderecoDTO;
 import com.tef.cursomc.services.ClienteService;
 
 @RestController
@@ -40,8 +41,8 @@ public class ClienteResource {
 
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO clienteDTO){
-		Cliente cliente = clienteService.fromDTO(clienteDTO);
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteEnderecoDTO clienteEnderecoDTO){
+		Cliente cliente = clienteService.fromDTO(clienteEnderecoDTO);
 		cliente = clienteService.insert(cliente);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
