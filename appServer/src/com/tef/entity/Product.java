@@ -6,10 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 
 @Entity
-@Table(name = "product")
 public class Product implements Serializable {
    
 	private static final long serialVersionUID = 1L;
@@ -18,16 +22,25 @@ public class Product implements Serializable {
 	private Integer id;
     private String description;
     private Double price;
+    
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Product(){}
 
+   
     public Product(Integer id, String description, Double price) {
-        this.id = id;
-        this.description = description;
-        this.price = price;
-    }
+		super();
+		this.id = id;
+		this.description = description;
+		this.price = price;	
+	}
 
-    public Integer getId() {
+
+
+	public Integer getId() {
         return id;
     }
 
@@ -50,4 +63,14 @@ public class Product implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+    
+    
 }

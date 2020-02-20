@@ -1,31 +1,81 @@
 package com.tef.controller;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.List;
 
+import javax.persistence.EntityManager;
+
+
+import com.tef.connection.ConnectionFactory;
 import com.tef.entity.Product;
 
 public class ProductController {
 	
+	private EntityManager entityManager = ConnectionFactory.getConnection();
 
-	EntityManagerFactory entityManagerFactory;
-	EntityManager entityManager;
+	public ProductController() {}
+		
 	
-	
-	public ProductController() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("appServer");
-		entityManager = entityManagerFactory.createEntityManager();		
+	@SuppressWarnings("unchecked")
+	public List<Product> list(){	
+		List<Product> lista = null; 		
+		try {
+			lista = entityManager.createQuery("FROM Product p").getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();		   
+		} finally {
+			entityManager.close();			
+		}		
+		return lista;		
 	}
 	
 	public Product save(Product product) {
-		
-		entityManager.getTransaction().begin();
-		entityManager.persist(product);
-		entityManager.getTransaction().commit();
-		entityManagerFactory.close();		
-		
+		try {
+			entityManager.getTransaction().begin();
+			
+			if(product.getId() == null) {				
+				entityManager.persist(product);
+			} else {
+				entityManager.merge(product);
+			}			
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+		} finally {
+			entityManager.close();			
+		}
 		return product;
+	}
+	
+	
+	public Product findById(Integer id) {
+		
+		Product product = null;
+		
+		try {			
+			product = entityManager.find(Product.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			entityManager.close();
+		}
+				
+		return product;
+		
+	}
+	
+	public void delete(Integer id) {
+		
+		try {
+			Product product = entityManager.find(Product.class, id);
+			entityManager.getTransaction().begin();
+			entityManager.remove(product);
+			entityManager.getTransaction().commit();			
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityManager.getTransaction().rollback();
+		} finally {
+			entityManager.close();			
+		}		
 	}
 
 }
