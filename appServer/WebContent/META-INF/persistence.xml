@@ -4,8 +4,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-	<!-- Nome da App -->
-	<persistence-unit name="appServer">
+	  <!-- unidade de persistencia -->
+	<persistence-unit name="app-server" transaction-type="RESOURCE_LOCAL">
+	  <!-- Implementação do JPA, no nosso caso Hibernate -->
+	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 	<!-- Classes -->
 	<class>com.tef.entity.Product</class>
@@ -22,6 +24,11 @@
 			
 			<!-- Faz atualização -->
 			<property name="hibernate.hbm2ddl.auto" value="none"></property>
+			
+			<!-- Configuração de Debug -->
+			<property name="hibernate.show_sql" value="true"></property>
+			<property name="hibernate.format_sql" value="true"></property>
+			<property name="use_sql_comments" value="true"></property>
 
 		</properties>
 
