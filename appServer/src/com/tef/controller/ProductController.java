@@ -6,9 +6,11 @@ import javax.persistence.EntityManager;
 
 
 import com.tef.connection.ConnectionFactory;
+import com.tef.entity.Category;
 import com.tef.entity.Product;
 
 public class ProductController {
+	
 	
 	private EntityManager entityManager = ConnectionFactory.getConnection();
 
@@ -29,10 +31,13 @@ public class ProductController {
 	}
 	
 	public Product save(Product product) {
+		
+		
 		try {
+						
 			entityManager.getTransaction().begin();
 			
-			if(product.getId() == null) {				
+			if(product.getId() == null) {					
 				entityManager.persist(product);
 			} else {
 				entityManager.merge(product);

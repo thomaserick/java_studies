@@ -11,7 +11,7 @@ public class testeCategory {
 	@Test
 	public void tCaregorySave() {
 		Category category = new Category();
-		category.setDescription("Verduras");
+		category.setDescription("Bebidas");
 		
 		CategoryController controller = new CategoryController();
 		controller.save(category);	

@@ -15,7 +15,7 @@ public void testSave() {
 	Product product = new Product();
 	Category category = new Category();
 	category.setId(2);
-	product.setDescription("Macarrão");
+	product.setDescription("Cerveja");
 	product.setPrice(2.0);	
 	product.setCategory(category);
 	ProductController controller = new ProductController();	

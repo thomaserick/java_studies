@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +27,20 @@ public class Category  implements Serializable{
 	
 	@Column
 	private String Description;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "category")
+	private List<Category> category = new ArrayList<>();
 					
+
+	public List<Category> getCategory() {
+		return category;
+	}
+
+	public void setCategory(List<Category> category) {
+		this.category = category;
+	}
+
 	public Category() {}
 	
 	public Category(Integer id, String description) {
@@ -77,6 +93,4 @@ public class Category  implements Serializable{
 	public void setDescription(String description) {
 		Description = description;
 	}
-	
-
 }

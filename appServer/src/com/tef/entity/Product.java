@@ -11,21 +11,23 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.tef.controller.CategoryController;
 
 
 @Entity
 public class Product implements Serializable {
    
 	private static final long serialVersionUID = 1L;
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
     private String description;
-    private Double price;
-    
+    private Double price;    
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne  
+	@JoinColumn(name = "category_id")
     private Category category;
 
     public Product(){}
