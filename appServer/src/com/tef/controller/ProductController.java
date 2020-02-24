@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 
 
 import com.tef.connection.ConnectionFactory;
-import com.tef.entity.Category;
 import com.tef.entity.Product;
 
 public class ProductController {
