@@ -34,6 +34,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-bean-validation</artifactId>
+			<version>2.29.1</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId> <!-- API Gerencia a comunicação -->
@@ -49,7 +54,8 @@
 
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-json-jackson</artifactId><!-- Faz o gerenciamento em Json -->
+			<artifactId>jersey-media-json-jackson</artifactId><!-- Faz o gerenciamento 
+				em Json -->
 			<version>2.29.1</version>
 		</dependency>
 
@@ -76,7 +82,7 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1200-jdbc41</version>
 		</dependency>
-		
+
 		<!-- HIBERNATE -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

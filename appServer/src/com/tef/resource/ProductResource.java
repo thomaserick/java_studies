@@ -1,15 +1,20 @@
 package com.tef.resource;
 
+
+
+import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import com.tef.controller.ProductController;
 import com.tef.entity.Product;
+import com.tef.exception.AuthenticationException;
 
 import java.util.List;
 
 
 @Path("/products")
+@ValidateOnExecution
 public class ProductResource {
 
 	private static final String CHARSET_UTF8 = ";charset=utf-8";
@@ -45,17 +50,16 @@ public class ProductResource {
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON + CHARSET_UTF8)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Product addProduct(Product product) {		
-		controller.save(product);		
-		return product;
+	public void addProduct(Product product) throws AuthenticationException {	
+			 controller.save(product);	
 	}
 
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON + CHARSET_UTF8)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Product editProduct(@PathParam("id") Integer id, Product product) {			
-		return controller.save(product);		
+	@Produces(MediaType.APPLICATION_JSON)	
+	public void editProduct(@PathParam("id") Integer id, Product product) throws AuthenticationException {	
+		  controller.save(product);	
 	}
 
 	@DELETE

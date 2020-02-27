@@ -8,10 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.tef.controller.CategoryController;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -21,9 +20,14 @@ public class Product implements Serializable {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer id;
+	@NotNull(message = "O campo descrição não pode ser nulo!")	
+	@Size(min = 3, message = "O campo descrição precisa ter no mínimo 3 caracteres!")
     private String description;
+	
+	@NotNull(message = "O campo preço não pode ser nulo!")
+	@Min(value = 0,message = "O campo preço não pode ser negativo.")
     private Double price;    
 
     @ManyToOne  

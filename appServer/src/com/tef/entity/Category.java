@@ -3,7 +3,7 @@ package com.tef.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,15 +29,14 @@ public class Category  implements Serializable{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
-	private List<Category> category = new ArrayList<>();
-					
+	private Set<Product> product;
 
-	public List<Category> getCategory() {
-		return category;
+	public Set<Product> getProduct() {
+		return product;
 	}
 
-	public void setCategory(List<Category> category) {
-		this.category = category;
+	public void setProduct(Set<Product> product) {
+		this.product = product;
 	}
 
 	public Category() {}

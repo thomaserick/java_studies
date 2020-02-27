@@ -2,12 +2,16 @@ package com.tef.controller;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
-
 
 import com.tef.connection.ConnectionFactory;
 import com.tef.entity.Product;
+import com.tef.exception.AuthenticationException;
+import com.tef.exception.EntityNotFound;
+import com.tef.exception.InvalidRequest;
 
+@RequestScoped
 public class ProductController {
 	
 	
@@ -29,8 +33,12 @@ public class ProductController {
 		return lista;		
 	}
 	
-	public Product save(Product product) {
+	public void save(Product product) throws AuthenticationException {
 		
+		if (product.getDescription().length() < 3)
+		{
+			throw new InvalidRequest("Description cannot be less than 3 characters.");
+		}
 		
 		try {
 						
@@ -41,13 +49,18 @@ public class ProductController {
 			} else {
 				entityManager.merge(product);
 			}			
-			entityManager.getTransaction().commit();
+			entityManager.getTransaction().commit();		
+			
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
+			entityManager.getTransaction().rollback();		
+			e.printStackTrace();
+					
 		} finally {
 			entityManager.close();			
-		}
-		return product;
+		}	
+		
+		
+		
 	}
 	
 	

@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 import com.tef.controller.ProductController;
 import com.tef.entity.Category;
 import com.tef.entity.Product;
+import com.tef.exception.AuthenticationException;
 
 public class TestProduct {
 
 	
 @Test
-public void testSave() {	
+public void testSave() throws AuthenticationException {	
 	Product product = new Product();
 	Category category = new Category();
 	category.setId(2);
@@ -19,7 +20,7 @@ public void testSave() {
 	product.setPrice(2.0);	
 	product.setCategory(category);
 	ProductController controller = new ProductController();	
-	controller.save(product);
+	controller.save(product) ;
 	
 }
 
