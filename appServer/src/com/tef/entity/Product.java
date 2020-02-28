@@ -1,13 +1,16 @@
 package com.tef.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,14 +33,26 @@ public class Product implements Serializable {
 	@Min(value = 0,message = "O campo preço não pode ser negativo.")
     private Double price;    
 
-    @ManyToOne  
-	@JoinColumn(name = "category_id")
+    @ManyToOne()    
     private Category category;
+    
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
+    private List<MovementProduct> movementProducts;
 
     public Product(){}
 
    
-    public Product(Integer id, String description, Double price) {
+    public List<MovementProduct> getMovementProducts() {
+		return movementProducts;
+	}
+
+
+	public void setMovementProducts(List<MovementProduct> movementProducts) {
+		this.movementProducts = movementProducts;
+	}
+
+
+	public Product(Integer id, String description, Double price) {
 		super();
 		this.id = id;
 		this.description = description;

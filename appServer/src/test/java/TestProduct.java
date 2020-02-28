@@ -26,7 +26,7 @@ public void testSave() throws AuthenticationException {
 
 
 @Test
-public void testUpdate() {
+public void testUpdate() throws AuthenticationException {
 	
 	Product product = new Product();
 	
