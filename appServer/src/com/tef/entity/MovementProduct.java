@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class MovementProduct implements Serializable{
 
@@ -36,8 +38,9 @@ public class MovementProduct implements Serializable{
 	private Double quantity;
 	
 	@ManyToOne	
+	@JsonIgnore
 	private Product product;	
-		
+	
 
 	public Product getProduct() {
 		return product;
@@ -80,6 +83,33 @@ public class MovementProduct implements Serializable{
 	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MovementProduct other = (MovementProduct) obj;
+		if (Id == null) {
+			if (other.Id != null)
+				return false;
+		} else if (!Id.equals(other.Id))
+			return false;
+		return true;
+	}
+	
+	
 
 	
 	
