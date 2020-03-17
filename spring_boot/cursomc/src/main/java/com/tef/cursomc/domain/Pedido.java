@@ -2,6 +2,7 @@ package com.tef.cursomc.domain;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
@@ -144,11 +145,12 @@ public class Pedido implements Serializable{
 	@Override
 	public String toString() {
 		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pr","BR"));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 		StringBuilder builder = new StringBuilder();
 		builder.append("Pedido numero");
 		builder.append(Id);
 		builder.append(", Instante: ");
-		builder.append(getInstanse());
+		builder.append(simpleDateFormat.format(getInstanse()));
 		builder.append(", Cliente: ");
 		builder.append(getCliente().getName());
 		builder.append(", Situação do pagamento: ");
