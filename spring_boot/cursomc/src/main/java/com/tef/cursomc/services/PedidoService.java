@@ -11,6 +11,7 @@ import com.tef.cursomc.domain.ItemPedido;
 import com.tef.cursomc.domain.PagamentoComBoleto;
 import com.tef.cursomc.domain.Pedido;
 import com.tef.cursomc.domain.enums.EstadoPagamento;
+import com.tef.cursomc.repositories.ClienteRepository;
 import com.tef.cursomc.repositories.ItemPedidoRepository;
 import com.tef.cursomc.repositories.PagamentoRepository;
 import com.tef.cursomc.repositories.PedidoRepository;
@@ -35,6 +36,9 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
 	
 	public Pedido find(Integer id) {
 		
@@ -51,6 +55,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstanse(new Date());
+		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		
@@ -66,13 +71,13 @@ public class PedidoService {
 		
 		for (ItemPedido itemPedido : obj.getItens()) {
 			itemPedido.setDesconto(0.0);
-			itemPedido.setPreco(produtoService.find(itemPedido.getProduto().getId()).getPreco());
+			itemPedido.setProduto(produtoService.find(itemPedido.getProduto().getId()));
+			itemPedido.setPreco(itemPedido.getProduto().getPreco());
 			itemPedido.setPedido(obj);			
 		}
 		
-		itemPedidoRepository.saveAll(obj.getItens());		
-		return obj;		
-		
+		itemPedidoRepository.saveAll(obj.getItens());
+		return obj;				
 	}
 	
 

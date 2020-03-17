@@ -1,8 +1,10 @@
 package com.tef.cursomc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -138,6 +140,31 @@ public class Pedido implements Serializable{
 	public void setItens(Set<ItemPedido> itens) {
 		this.itens = itens;
 	}
+
+	@Override
+	public String toString() {
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pr","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido numero");
+		builder.append(Id);
+		builder.append(", Instante: ");
+		builder.append(getInstanse());
+		builder.append(", Cliente: ");
+		builder.append(getCliente().getName());
+		builder.append(", Situação do pagamento: ");
+		builder.append(getPagamento().getEstado().getDescricao());
+		builder.append("\n Detalhes:\n");
+		for (  ItemPedido itempedido : getItens()) {
+			builder.append(itempedido.toString());				
+		}
+		builder.append("Valor Total: ");
+		builder.append(numberFormat.format(getValorTotal()));
+		return builder.toString();
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -1,6 +1,8 @@
 package com.tef.cursomc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -112,9 +114,21 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pr","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getName());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitário ");
+		builder.append(numberFormat.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(numberFormat.format(getSubtotal()));
+		builder.append("\n");		
+		return builder.toString();
+	}
 	
 }
