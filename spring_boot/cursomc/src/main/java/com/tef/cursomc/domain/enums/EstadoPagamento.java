@@ -1,7 +1,5 @@
 package com.tef.cursomc.domain.enums;
 
-import com.sun.xml.bind.v2.runtime.IllegalAnnotationException;
-
 public enum EstadoPagamento {
 	
 	PENDENTE(1,"Pendente"),

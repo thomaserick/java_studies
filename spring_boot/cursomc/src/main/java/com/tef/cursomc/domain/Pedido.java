@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido implements Serializable{
@@ -30,7 +29,7 @@ public class Pedido implements Serializable{
 	private Integer Id;
 	
 	@JsonFormat(pattern = "dd/MM/yyy HH:mm")
-	private Date instanse;
+	private Date instante;
 	
 	//Pecularidade do JPA
 	
@@ -51,10 +50,10 @@ public class Pedido implements Serializable{
 	
 	public Pedido() {}
 
-	public Pedido(Integer id, Date instanse,  Cliente cliente, Endereco enderecoEntrega) {
+	public Pedido(Integer id, Date instante,  Cliente cliente, Endereco enderecoEntrega) {
 		super();
 		Id = id;
-		this.instanse = instanse;	
+		this.instante = instante;	
 		this.cliente = cliente;
 		this.enderecoEntrega = enderecoEntrega;
 	}
@@ -77,12 +76,12 @@ public class Pedido implements Serializable{
 		Id = id;
 	}
 
-	public Date getInstanse() {
-		return instanse;
+	public Date getInstante() {
+		return instante;
 	}
 
-	public void setInstanse(Date instanse) {
-		this.instanse = instanse;
+	public void setInstante(Date instante) {
+		this.instante = instante;
 	}
 
 	public Pagamento getPagamento() {
@@ -150,7 +149,7 @@ public class Pedido implements Serializable{
 		builder.append("Pedido numero");
 		builder.append(Id);
 		builder.append(", Instante: ");
-		builder.append(simpleDateFormat.format(getInstanse()));
+		builder.append(simpleDateFormat.format(getInstante()));
 		builder.append(", Cliente: ");
 		builder.append(getCliente().getName());
 		builder.append(", Situação do pagamento: ");
