@@ -15,17 +15,16 @@ import com.tef.cursomc.resources.utils.URL;
 import com.tef.cursomc.services.ProdutoService;
 
 @RestController
-@RequestMapping(value="/produtos")
+@RequestMapping(value = "/produtos")
 public class ProdutoResource {
-	
-	
+
 	@Autowired
 	private ProdutoService produtoService;
-	
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Produto> find(@PathVariable Integer id) {			
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Produto> find(@PathVariable Integer id) {
 		Produto produto = produtoService.find(id);
-		return ResponseEntity.ok().body(produto);			
+		return ResponseEntity.ok().body(produto);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -35,13 +34,13 @@ public class ProdutoResource {
 			@RequestParam(value = "linesPage", defaultValue = "24") Integer linesPage,
 			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-	
-		Page<Produto> list = produtoService.search(URL.decodeParam(name), URL.decodeIntList(categorias), page, linesPage, orderBy, direction);
-				
+
+		Page<Produto> list = produtoService.search(URL.decodeParam(name), URL.decodeIntList(categorias), page,
+				linesPage, orderBy, direction);
+
 		// Converte a lista para ListDto
 		Page<ProdutoDTO> listDto = list.map(obj -> new ProdutoDTO(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
-	
-	
+
 }
