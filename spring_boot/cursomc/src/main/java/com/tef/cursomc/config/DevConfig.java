@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Profile;
 
 import com.tef.cursomc.services.DBService;
 import com.tef.cursomc.services.EmailService;
-import com.tef.cursomc.services.MockEmailService;
 import com.tef.cursomc.services.SmtpEmailService;
 
 @Configuration

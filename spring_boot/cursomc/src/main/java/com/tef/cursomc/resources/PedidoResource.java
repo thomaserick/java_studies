@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tef.cursomc.domain.Categoria;
 import com.tef.cursomc.domain.Pedido;
-import com.tef.cursomc.dto.CategoriaDTO;
 import com.tef.cursomc.services.PedidoService;
 
 @RestController
