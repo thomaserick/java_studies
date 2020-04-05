@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,19 +33,16 @@ public class ClienteResource {
 	private ClienteService clienteService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Cliente> find(@PathVariable Integer id) {		
-	
+	public ResponseEntity<Cliente> find(@PathVariable Integer id) {	
 		Cliente cliente = clienteService.find(id);
-		return ResponseEntity.ok().body(cliente);	
-		
+		return ResponseEntity.ok().body(cliente);			
 	}
 
 	
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteEnderecoDTO clienteEnderecoDTO){
 		Cliente cliente = clienteService.fromDTO(clienteEnderecoDTO);
-		cliente = clienteService.insert(cliente);
-		
+		cliente = clienteService.insert(cliente);		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();
@@ -61,7 +59,7 @@ public class ClienteResource {
 		
 	}
 	
-	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		clienteService.delete(id);
@@ -69,6 +67,7 @@ public class ClienteResource {
 		
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<Cliente> list = clienteService.findAll();
@@ -79,6 +78,7 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPage", defaultValue = "24") Integer linesPage,
