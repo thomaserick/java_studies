@@ -8,15 +8,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tef.cursomc.domain.Categoria;
 import com.tef.cursomc.domain.Cidade;
 import com.tef.cursomc.domain.Cliente;
 import com.tef.cursomc.domain.Endereco;
 import com.tef.cursomc.domain.enums.TipoCliente;
-import com.tef.cursomc.dto.CategoriaDTO;
 import com.tef.cursomc.dto.ClienteDTO;
 import com.tef.cursomc.dto.ClienteEnderecoDTO;
 import com.tef.cursomc.repositories.ClienteRepository;
@@ -32,6 +31,9 @@ public class ClienteService {
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder  bCrypt;
 
 	public Cliente find(Integer id) {
 
@@ -75,13 +77,13 @@ public class ClienteService {
 	}
 	
 	public Cliente fromDTO(ClienteDTO clienteDTO) {
-		return new Cliente(clienteDTO.getId(),clienteDTO.getName(),clienteDTO.getEmail(),null,null);		
+		return new Cliente(clienteDTO.getId(),clienteDTO.getName(),clienteDTO.getEmail(),null,null,null);		
 	}
 	
 	public Cliente fromDTO(ClienteEnderecoDTO clienteEnderecoDTO) {
 		//Não esta feito
 		//throw new UnsupportedOperationException();
-		Cliente cli = new Cliente(null, clienteEnderecoDTO.getName(), clienteEnderecoDTO.getEmail(), clienteEnderecoDTO.getCpfCnpj(), TipoCliente.toEnum(clienteEnderecoDTO.getTipo()));
+		Cliente cli = new Cliente(null, clienteEnderecoDTO.getName(), clienteEnderecoDTO.getEmail(), clienteEnderecoDTO.getCpfCnpj(), TipoCliente.toEnum(clienteEnderecoDTO.getTipo()),bCrypt.encode(clienteEnderecoDTO.getSenha()));
 		Cidade cid = new Cidade(clienteEnderecoDTO.getCidadeId(),null,null);
 		Endereco end = new Endereco(null, clienteEnderecoDTO.getLogradouro(), clienteEnderecoDTO.getNumend(), clienteEnderecoDTO.getComplemento(), clienteEnderecoDTO.getBairro(), clienteEnderecoDTO.getCep(), cli, cid);
 		cli.getEnderecos().add(end);
