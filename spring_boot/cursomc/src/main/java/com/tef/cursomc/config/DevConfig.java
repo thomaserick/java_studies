@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.tef.cursomc.services.DBService;
 import com.tef.cursomc.services.EmailService;
+import com.tef.cursomc.services.MockEmailService;
 import com.tef.cursomc.services.SmtpEmailService;
 
 @Configuration
@@ -33,7 +34,10 @@ public class DevConfig {
 	
 	@Bean
 	public EmailService emailService() {
-		return new SmtpEmailService();
+//Envia por SMTP gmail
+//		return new SmtpEmailService();
+//Teste usando mokito		
+		return new MockEmailService();
 	}
 
 }
