@@ -57,19 +57,7 @@ public class Cliente implements Serializable {
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name="PERFIS")
-	private Set<Integer> perfis = new HashSet<Integer>();
-	
-	private String imageUrl;
-	
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
+	private Set<Integer> perfis = new HashSet<Integer>();	
 
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);   //Por padrão ja vai setar o perfil Cliente
