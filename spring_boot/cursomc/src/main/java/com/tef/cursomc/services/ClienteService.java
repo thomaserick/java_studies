@@ -44,13 +44,13 @@ public class ClienteService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCrypt;
-	
+
 	@Autowired
 	private ImageService imageService;
-	
+
 	@Value("${img.prefix.client.profile}")
 	private String prefix;
-	
+
 	@Value("${img.profile.size}")
 	private Integer size;
 
@@ -95,6 +95,22 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 
+	public Cliente findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
+		Cliente cliente = clienteRepository.findByEmail(email);
+		if (cliente == null) {
+			throw new ObjectNotFoundException(
+					"Objeto não encontrado! id:" + user.getId() + ", Tipo: " + Cliente.class.getName());
+		}
+
+		return cliente;
+
+	}
+
 	public Page<Cliente> findPage(Integer page, Integer linesPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPage, Direction.valueOf(direction), orderBy);
 		return clienteRepository.findAll(pageRequest);
@@ -135,15 +151,14 @@ public class ClienteService {
 		if (user == null) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		
+
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
-		
-		
-		String fileName =  prefix + user.getId()+ ".jpg";
-		
-		return awsS3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"),fileName,"image/jpeg");
+
+		String fileName = prefix + user.getId() + ".jpg";
+
+		return awsS3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image/jpeg");
 
 	}
 
