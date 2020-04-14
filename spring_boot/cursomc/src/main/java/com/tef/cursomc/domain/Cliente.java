@@ -59,11 +59,23 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="PERFIS")
 	private Set<Integer> perfis = new HashSet<Integer>();
 	
+	private String imageUrl;
 	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);   //Por padrão ja vai setar o perfil Cliente
 	}
 
+	
 	public Cliente(Integer id, String name, String email, String cpfCnpj, TipoCliente tipo,String senha) {
 		super();
 		Id = id;

@@ -36,7 +36,7 @@ public class ClienteService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	AwsS3Service awsS3Service;
 
@@ -117,10 +117,20 @@ public class ClienteService {
 		newCliente.setName(cliente.getName());
 		newCliente.setEmail(cliente.getEmail());
 	}
-	
+
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		return awsS3Service.uploadFile(multipartFile);
-		
+
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
+		URI uri = awsS3Service.uploadFile(multipartFile);
+		Cliente cliente = find(user.getId());
+		cliente.setImageUrl(uri.toString());
+		clienteRepository.save(cliente);
+		return uri;
+
 	}
 
 }
